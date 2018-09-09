@@ -33,3 +33,7 @@ services:
         class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
         public: false
         tags: [serializer.normalizer]
+
+    app.pinyin:
+        class: App\Services\PinYin
+        public: true
