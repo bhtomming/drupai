@@ -35,7 +35,7 @@
                 <td>{{ article.oldLink }}</td>
                 <td>{{ article.slug }}</td>
                 <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('article_show', {'slug': article.slug}) }}">show</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
                 </td>
             </tr>

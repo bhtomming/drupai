@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,11 +48,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="category_show", methods="GET")
+     * @Route("/{slug}", name="category_show", methods="GET")
      */
-    public function show(Category $category): Response
+    public function show(Category $category, ArticleRepository $articleRepository): Response
     {
-        return $this->render('category/show.html.twig', ['category' => $category]);
+        $articles = $articleRepository->findByCategory($category);
+
+        return $this->render('article/index.html.twig', ['articles' => $articles]);
     }
 
     /**

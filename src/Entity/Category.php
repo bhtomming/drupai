@@ -50,6 +50,11 @@ class Category
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $keywords;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -147,6 +152,18 @@ class Category
             $this->articles->removeElement($article);
             $article->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getKeywords(): ?string
+    {
+        return $this->keywords;
+    }
+
+    public function setKeywords(?string $keywords): self
+    {
+        $this->keywords = $keywords;
 
         return $this;
     }
