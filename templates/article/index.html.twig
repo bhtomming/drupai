@@ -12,12 +12,9 @@
                 <th>Title</th>
                 <th>Summary</th>
                 <th>TitleImg</th>
-                <th>Content</th>
                 <th>Author</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
-                <th>OldLink</th>
-                <th>Slug</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,12 +25,9 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.summary }}</td>
                 <td>{{ article.titleImg }}</td>
-                <td>{{ article.content }}</td>
                 <td>{{ article.author }}</td>
                 <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.oldLink }}</td>
-                <td>{{ article.slug }}</td>
                 <td>
                     <a href="{{ path('article_show', {'slug': article.slug}) }}">show</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>

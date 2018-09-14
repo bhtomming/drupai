@@ -23,25 +23,6 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function findByCategory(Category $category)
-    {
-        $query = $this->getEntityManager()->createQuery('
-            SELECT a,c
-            FROM App:Article a
-            JOIN a.categories c
-            WHERE c.id = :category
-        ')->setParameter('category',$category->getId());
-
-        return $this->createPaginator($query,1);
-    }
-
-    public function createPaginator(Query $query, int $page) :Pagerfanta
-    {
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
-        $paginator->setMaxPerPage(Article::NUM_ITEMS);
-        $paginator->setCurrentPage($page);
-        return $paginator;
-    }
 
 //    /**
 //     * @return Article[] Returns an array of Article objects

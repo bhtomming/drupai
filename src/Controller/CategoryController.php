@@ -50,10 +50,9 @@ class CategoryController extends Controller
     /**
      * @Route("/{slug}", name="category_show", methods="GET")
      */
-    public function show(Category $category, ArticleRepository $articleRepository): Response
+    public function show(Category $category): Response
     {
-        $articles = $articleRepository->findByCategory($category);
-
+        $articles = $category->getArticles();
         return $this->render('article/index.html.twig', ['articles' => $articles]);
     }
 
