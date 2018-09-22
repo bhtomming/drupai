@@ -1,3 +1,46 @@
 body {
     background-color: lightgray;
 }
+.card-icon{
+    font-size: 78px;
+    color: #007bff;
+}
+
+.case-wrapper{
+    position: relative;
+    padding-left: 0!important;
+    padding-right: 0!important;
+    overflow: hidden;
+}
+
+.case-swiper{
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+}
+.case-swiper>p{
+    margin-top: 40%;
+}
+.case-swiper>a{
+    display: block;
+    border: 1px solid #fff;
+    width: 50%;
+    line-height: 36px;
+    margin: 0 auto;
+    color: #fff;
+}
+.case-wrapper:hover .case-swiper{
+    top: 0;
+    left: 0;
+}
+#footer{
+    font-size: 14px;
+}
+#footer a{
+    color: #fff;
+    text-decoration: none;
+}
+#footer a:hover{
+    color: #0d6aad;
+}

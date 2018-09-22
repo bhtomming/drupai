@@ -30,3 +30,6 @@ framework:
         #app: cache.adapter.apcu
     serializer:
         name_converter: 'serializer.name_converter.camel_case_to_snake_case'
+
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/default", name="default")
+     * @Route("/", name="home")
      */
     public function index()
     {
@@ -28,5 +28,33 @@ class DefaultController extends Controller
      */
     public function oldLink(Article $article){
         return $this->redirectToRoute('article_show',['slug' => $article->getSlug()],301);
+    }
+
+    /**
+     * @Route("/product/", name="product_list")
+     */
+    public function product(){
+        return $this->render('product/list.html.twig');
+    }
+
+    /**
+     * @Route("/case/", name="case_list")
+     */
+    public function cases(){
+        return $this->render('case/list.html.twig');
+    }
+
+    /**
+     * @Route("/news/", name="news_list")
+     */
+    public function news(){
+        return $this->render('news/list.html.twig');
+    }
+
+    /**
+     * @Route("/contact/", name="contact")
+     */
+    public function contact(){
+        return $this->render('default/contact.html.twig');
     }
 }

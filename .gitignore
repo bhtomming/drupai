@@ -22,6 +22,14 @@ yarn-error.log
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 
-###< 编辑器信息 ###
+###> 编辑器信息 ###
 /.idea
 /.idea/
+###< 编辑器信息 ###
+
+###> 参数设置 ###
+/config/packages/parameters.yaml
+###< 参数设置 ###
+
+/public/uploader
+/public/uploader/

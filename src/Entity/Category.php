@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
-class Category
+class Category extends PageMeta
 {
     /**
      * @ORM\Id()
@@ -23,40 +23,10 @@ class Category
      */
     private $title;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $description;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
-
-
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
-     */
-    private $articles;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $keywords;
 
     public function __construct()
     {
+        parent::__construct();
         $this->articles = new ArrayCollection();
     }
 
@@ -77,94 +47,9 @@ class Category
         return $this;
     }
 
-    public function getDescription(): ?string
+
+    public function __toString() :string
     {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        if(!$this->updatedAt){
-            $this->setUpdatedAt($createdAt);
-        }
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->addCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): self
-    {
-        if ($this->articles->contains($article)) {
-            $this->articles->removeElement($article);
-            $article->removeCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function getKeywords(): ?string
-    {
-        return $this->keywords;
-    }
-
-    public function setKeywords(?string $keywords): self
-    {
-        $this->keywords = $keywords;
-
-        return $this;
+        return $this->title;
     }
 }

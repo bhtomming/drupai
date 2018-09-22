@@ -1,0 +1,25 @@
+easy_admin:
+    entities:
+        UserLog:
+            class: App\Entity\UserLog
+            label: '访问日志'
+            form:
+                fields:
+                    - {property: id, label: 'ID标识'}
+                    - {property: currentUrl, label: '访问地址'}
+                    - {property: referrer, label: '来源'}
+                    - {property: username, label: '用户'}
+                    - {property: createdAt, label: '时间'}
+            list:
+                title: '访问日志'
+                actions:
+                    - '-edit'
+                    - '-new'
+                    - show
+                fields:
+                    - {property: id, label: 'ID标识'}
+                    - {property: currentUrl, label: '访问地址'}
+                    - {property: referrer, label: '来源'}
+                    - {property: username, label: '用户'}
+                    - {property: action, label: '方法'}
+                    - {property: createdAt, label: '时间'}

@@ -3,7 +3,6 @@
 namespace App\EventSubscriber;
 
 use App\Entity\UserLog;
-use function PHPSTORM_META\type;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -21,7 +20,10 @@ class LogSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
         $currentUrl = $request->server->get('REQUEST_URI');
         $token = $this->container->get('security.token_storage')->getToken();
-
+        $ip = $request->getClientIp();
+        if($ip == "127.0.0.1"){
+            return;
+        }
         if(!is_null($token) && !preg_match('/\/userlog\//',$currentUrl) && $request->get('filter') === null){
             $em = $this->container->get('doctrine.orm.entity_manager');
             $userLog = new UserLog();

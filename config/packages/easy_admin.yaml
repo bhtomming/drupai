@@ -1,6 +1,14 @@
+imports:
+    - { resource: easy_admin/ }
 easy_admin:
-    entities:
-#        # List the entity class name you want to manage
-#        - App\Entity\Product
-#        - App\Entity\Category
-         - App\Entity\User
+    site_name: 助派信息管理系统
+    formats:
+        date: 'Y年m月d日'
+        time: 'H:i:s'
+        datetime: 'Y年m月d日 H:i:s'
+    design:
+        menu:
+            - {label: '文章管理', entity: Article}
+            - {label: '文章分类', entity: Category}
+            - {label: '用户管理', entity: User}
+            - {label: '访问记录', entity: UserLog}

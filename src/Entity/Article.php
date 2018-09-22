@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
-class Article
+class Article extends PageMeta
 {
     public const NUM_ITEMS = 25;
 
@@ -46,43 +46,25 @@ class Article
      */
     private $author;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $oldLink;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="articles")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
+     * @ORM\JoinTable(name="article_category")
+     * @ORM\OrderBy({"createdAt": "ASC"})
      */
     private $categories;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $keywords;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $description;
 
     public function __construct()
     {
+        parent::__construct();
         $this->setCreatedAt(new \DateTime('now'));
         $this->categories = new ArrayCollection();
     }
@@ -156,32 +138,6 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        if(!$this->updatedAt){
-            $this->setUpdatedAt($createdAt);
-        }
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     public function getOldLink(): ?string
     {
         return $this->oldLink;
@@ -194,17 +150,6 @@ class Article
         return $this;
     }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Category[]
@@ -214,12 +159,13 @@ class Article
         return $this->categories;
     }
 
-    public function addCategory(Category $category): self
+    public function addCategory(?Category ...$categories): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories[] = $category;
+        foreach ($categories as $category){
+            if (!$this->categories->contains($category)) {
+                $this->categories[] = $category;
+            }
         }
-
         return $this;
     }
 
@@ -232,27 +178,5 @@ class Article
         return $this;
     }
 
-    public function getKeywords(): ?string
-    {
-        return $this->keywords;
-    }
 
-    public function setKeywords(?string $keywords): self
-    {
-        $this->keywords = $keywords;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 }

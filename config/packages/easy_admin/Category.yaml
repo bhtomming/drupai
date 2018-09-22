@@ -1,0 +1,11 @@
+easy_admin:
+    entities:
+        Category:
+            class: App\Entity\Category
+            label: '文章分类'
+            form:
+                fields:
+                    - id
+                    - title
+                    - keywords
+                    - description

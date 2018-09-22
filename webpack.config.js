@@ -18,9 +18,13 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('app', './assets/js/app.js')
+    .addEntry('js/swiper', 'swiper/dist/js/swiper.min.js')
+//	.addEntry('images/case', './assets/images/case.jpg')
+    //.addEntry('js/bootstrap.min', './assets/js/bootstrap.min.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
-
+	//.addStyleEntry('css/bootstrap.min', ['./assets/css/bootstrap.min.css'])
+	//.addStyleEntry('font/css/open-iconic-bootstrap.min', ['./assets/font/css/open-iconic-bootstrap.min.css'])
     /*
      * FEATURE CONFIG
      *
@@ -33,15 +37,21 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
+    //.enableVersioning(true)
+
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
-
+    .enableSassLoader()
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+	.autoProvideVariables({
+		$: 'jquery',
+		jQuery: 'jquery',
+		'window.jQuery': 'jquery',
+	})
 ;
 
 module.exports = Encore.getWebpackConfig();
