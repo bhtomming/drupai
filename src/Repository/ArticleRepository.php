@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Article;
-use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -52,4 +51,40 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findLatest(int $page = 1): Pagerfanta
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT a, u, g
+                FROM App:Article a
+                JOIN a.author u
+                LEFT JOIN a.categories g
+                WHERE a.createdAt <= :now
+                ORDER BY a.createdAt DESC
+            ')
+            ->setParameter('now', new \DateTime())
+        ;
+
+        return $this->createPaginator($query, $page);
+    }
+
+    public function createPaginator(Query $query, int $page): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
+        $paginator->setMaxPerPage(Article::NUM_ITEMS);
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
+    }
+
+    public function findByCategory($category)
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.categories','g')
+            ->where('g.id=:c')
+            ->setParameter('c',$category)
+            ->orderBy('a.createdAt','DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }

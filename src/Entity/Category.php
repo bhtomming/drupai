@@ -23,6 +23,11 @@ class Category extends PageMeta
      */
     private $title;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
+     */
+    private $articles;
+
 
     public function __construct()
     {
@@ -51,5 +56,26 @@ class Category extends PageMeta
     public function __toString() :string
     {
         return $this->title;
+    }
+
+    public function addArticle(Article $article)
+    {
+        if(!$this->articles->contains($article)){
+            $this->articles->add($article);
+        }
+        return $this;
+    }
+
+    public function removeArticle(Article $article)
+    {
+        if($this->articles->contains($article)){
+            $this->articles->remove($article);
+        }
+        return $this;
+    }
+
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }

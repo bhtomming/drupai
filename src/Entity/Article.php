@@ -40,22 +40,21 @@ class Article extends PageMeta
      */
     private $content;
 
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
-
-
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $oldLink;
 
-
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"},inversedBy="articles")
      * @ORM\JoinTable(name="article_category")
      * @ORM\OrderBy({"createdAt": "ASC"})
      */
@@ -126,12 +125,12 @@ class Article extends PageMeta
 
 
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(User $author): self
     {
         $this->author = $author;
 

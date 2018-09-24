@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh_CN">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +12,10 @@
     </head>
     <body>
     {{ include('navbar.html.twig') }}
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block sidebar %}
+            {% endblock %}
+        {% endblock %}
     {{ include('footer.html.twig') }}
         {% block javascripts %}
             <script src="{{ asset('build/app.js') }}"></script>

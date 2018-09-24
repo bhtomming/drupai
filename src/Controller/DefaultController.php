@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -40,15 +41,18 @@ class DefaultController extends Controller
     /**
      * @Route("/case/", name="case_list")
      */
-    public function cases(){
-        return $this->render('case/list.html.twig');
+    public function cases(ArticleRepository $repository){
+        $articles = $repository->findByCategory(26);
+        return $this->render('case/list.html.twig',['articles'=>$articles]);
     }
 
     /**
-     * @Route("/news/", name="news_list")
+     * @Route("/news/",defaults={"page": "1", "_format"="html"}, name="news_list")
+     * @Route("/news/pages/{page}",defaults={"_format"="html"}, requirements={"page": "[1-9]\d*"}, name="news_index_paginated")
      */
-    public function news(){
-        return $this->render('news/list.html.twig');
+    public function news(ArticleRepository $articleRepository,int $page){
+        $articles = $articleRepository->findLatest($page);
+        return $this->render('news/list.html.twig',['articles'=>$articles]);
     }
 
     /**

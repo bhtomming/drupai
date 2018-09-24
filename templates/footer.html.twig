@@ -14,21 +14,21 @@
            <div class="col-md-4">
                <h5>相关链接</h5>
                <ul class="list-group list-group-flush">
-                   <li class="list-group-item bg-dark"><a href="#">产品中心</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">客户案例</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">最新动态</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">联系我们</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('product_list') }}">产品中心</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('case_list') }}">客户案例</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('news_list') }}">最新动态</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('article_show',{slug:'lian-xi-wo-men.html'}) }}">联系我们</a></li>
                </ul>
            </div>
            <div class="col-md-4">
                <h5>相关知识</h5>
                <ul class="list-group list-group-flush">
-                   <li class="list-group-item bg-dark"><a href="#">HTML</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">CSS</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">JavaScript</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">PHP</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">公众平台</a></li>
-                   <li class="list-group-item bg-dark"><a href="#">小程序</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('category_show',{slug:'html.html'}) }}">HTML</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('category_show',{slug:'CSS.html'}) }}">CSS</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('category_show',{slug:'JavaScript.html'}) }}">JavaScript</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('category_show',{slug:'PHP.html'}) }}">PHP</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('category_show',{slug:'gong-zhong-ping-tai.html'}) }}">公众平台</a></li>
+                   <li class="list-group-item bg-dark"><a href="{{ path('category_show',{slug:'xiao-chen-xu.html'}) }}">小程序</a></li>
                </ul>
            </div>
        </div>
@@ -36,14 +36,14 @@
            <h5 class="col-12 my-4">友情链接</h5>
            <div class="col-6 mx-auto">
                <div class="row">
-                   <div class="col-md-3"><a href="#">drupal花园</a></div>
-                   <div class="col-md-3"><a href="#">猪跑啦</a></div>
-                   <div class="col-md-3"><a href="#">新中盛</a></div>
-                   <div class="col-md-3"><a href="#">未因</a></div>
+                   <div class="col-md-3"><a href="http://drupalchina.cn/">drupal花园</a></div>
+                   <div class="col-md-3"><a href="http://www.drupalla.com/">猪跑啦</a></div>
+                   <div class="col-md-3"><a href="http://www.bhxzs.com">新中盛</a></div>
+                   <div class="col-md-3"><a href="http://www.whyyee.cn">未因</a></div>
                </div>
            </div>
 
-           <div class="col-12 my-3"><a href="#">桂ICP备16001430号</a></div>
+           <div class="col-12 my-3"><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">桂ICP备16001430号</a></div>
        </div>
    </div>
 </footer>

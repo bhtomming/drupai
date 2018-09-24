@@ -4,56 +4,24 @@
 {% block title %}{{ article.title }}_{{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
+    <div class="container">
+        <div class="row my-md-5">
+            <div class="col-md-9">
+                <h1 class="text-center">{{ article.title }}</h1>
+                <blockquote class="blockquote text-center">
+                    <p>{{ article.summary }}</p>
+                    <footer class="blockquote-footer">作者:{{ article.author }}</footer>
+                </blockquote>
+                <p class="py-md-3">{{ article.content |raw }}</p>
+            </div>
+            {% block siderbar %}
+                <div class="col-md-3">
+                    {% for category in article.categories %}
+                    {{ relations(category) }}
+                    {% endfor %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Summary</th>
-                <td>{{ article.summary }}</td>
-            </tr>
-            <tr>
-                <th>TitleImg</th>
-                <td>{{ article.titleImg }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content |raw }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ article.author }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>OldLink</th>
-                <td>{{ article.oldLink }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ article.slug }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('article_index') }}">back to list</a>
-
-    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
-
-    {{ include('article/_delete_form.html.twig') }}
 {% endblock %}

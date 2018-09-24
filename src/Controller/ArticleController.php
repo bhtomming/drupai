@@ -25,7 +25,7 @@ class ArticleController extends Controller
 
     /**
      * @Route("/new", name="article_new", methods="GET|POST")
-     */
+
     public function new(Request $request): Response
     {
         $article = new Article();
@@ -44,10 +44,11 @@ class ArticleController extends Controller
             'article' => $article,
             'form' => $form->createView(),
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{slug}", name="article_show", methods="GET")
+     *
      */
     public function show(Article $article): Response
     {
@@ -56,7 +57,7 @@ class ArticleController extends Controller
 
     /**
      * @Route("/{id}/edit", name="article_edit", methods="GET|POST")
-     */
+
     public function edit(Request $request, Article $article): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
@@ -73,11 +74,11 @@ class ArticleController extends Controller
             'article' => $article,
             'form' => $form->createView(),
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{id}", name="article_delete", methods="DELETE")
-     */
+
     public function delete(Request $request, Article $article): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
@@ -87,5 +88,5 @@ class ArticleController extends Controller
         }
 
         return $this->redirectToRoute('article_index');
-    }
+    }*/
 }
