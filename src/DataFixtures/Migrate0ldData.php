@@ -39,7 +39,7 @@ class Migrate0ldData extends Fixture
         }
         foreach ($bodyData as $index => $page){
             $article = new Article();
-            $page[1] = str_replace('/sites/default/files/ueditor/','/uploads/images/articles',$page[1]);
+            $page[1] = str_replace('/sites/default/files/ueditor/images','/uploads/images/articles',$page[1]);
             $bodyData[$index]  = $page;
             $sql = "select nid,title,created,changed from drun_node where nid = {$bodyData[$index][0]}";
             $titles = $conn->query($sql)->fetch_row();
