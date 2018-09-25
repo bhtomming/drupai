@@ -6,20 +6,28 @@ use App\Entity\Category;
 use App\Services\PinYin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 class CategoryFixture extends Fixture
 {
     private $pinyin;
-    public function __construct(PinYin $pinYin)
+    private $container;
+    public function __construct(PinYin $pinYin, ContainerInterface $container)
     {
         $this->pinyin = $pinYin;
+        $this->container = $container;
     }
 
     public function load(ObjectManager $manager)
     {
         // $product = new Product();
         // $manager->persist($product);
-        $conn = new \mysqli('127.0.0.1','root','root','drupai');
+        $host = $this->container->getParameter('host');
+        $dbuser = $this->container->getParameter('user');
+        $pass = $this->container->getParameter('pass');
+        $dbname = $this->container->getParameter('dbname');
+        $conn = new \mysqli($host,$dbuser,$pass,$dbname);
         $conn->query('set name utf8');
         $sql = "select name, description from drun_taxonomy_term_data";
         $taxonomies = $bodyData = $conn->query($sql)->fetch_all();
@@ -33,6 +41,6 @@ class CategoryFixture extends Fixture
 
         }
         file_put_contents(__DIR__.'/fixture.log.txt','存入分类信息\n',FILE_APPEND);
-        $manager->flush();
+        //$manager->flush();
     }
 }

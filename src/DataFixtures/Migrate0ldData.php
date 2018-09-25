@@ -8,21 +8,28 @@ use App\Entity\User;
 use App\Services\PinYin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 
 class Migrate0ldData extends Fixture
 {
     private $pinyin;
-    public function __construct(PinYin $pinYin)
+    private $container;
+    public function __construct(PinYin $pinYin, ContainerInterface $container)
     {
         $this->pinyin = $pinYin;
+        $this->container = $container;
     }
 
     public function load(ObjectManager $manager)
     {
         // $product = new Product();
         // $manager->persist($product);
-
-        $conn = new \mysqli('127.0.0.1','root','root','drupai');
+        $host = $this->container->getParameter('host');
+        $dbuser = $this->container->getParameter('user');
+        $pass = $this->container->getParameter('pass');
+        $dbname = $this->container->getParameter('dbname');
+        $conn = new \mysqli($host,$dbuser,$pass,$dbname);
         $conn->query('set name utf8');
         $sql = "select entity_id, body_value,body_summary from drun_field_data_body";
         $bodyData = $conn->query($sql)->fetch_all();
@@ -61,9 +68,9 @@ class Migrate0ldData extends Fixture
             //$pages[] = array_merge($titles,$bodyData[$index]);
 
             $article->addCategory($category);
-            $manager->persist($article);
+           // $manager->persist($article);
         }
-        $manager->flush();
+       // $manager->flush();
     }
 
 

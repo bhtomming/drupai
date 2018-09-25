@@ -1,3 +1,7 @@
 parameters:
     admin_path: '/admin'
     locale: zh_CN
+    host: '127.0.0.1'
+    user: 'root'
+    pass: 'root'
+    dbname: 'drupai'
