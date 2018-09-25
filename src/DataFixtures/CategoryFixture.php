@@ -40,7 +40,7 @@ class CategoryFixture extends Fixture
             $manager->persist($category);
 
         }
-        file_put_contents(__DIR__.'/fixture.log.txt','存入分类信息\n',FILE_APPEND);
-        //$manager->flush();
+
+        $manager->flush();
     }
 }

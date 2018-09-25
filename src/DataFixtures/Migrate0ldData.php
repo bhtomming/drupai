@@ -65,12 +65,11 @@ class Migrate0ldData extends Fixture
             if(!$category instanceof Category){
                 continue;
             }
-            //$pages[] = array_merge($titles,$bodyData[$index]);
 
             $article->addCategory($category);
-           // $manager->persist($article);
+            $manager->persist($article);
         }
-       // $manager->flush();
+        $manager->flush();
     }
 
 
