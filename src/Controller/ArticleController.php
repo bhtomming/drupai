@@ -17,6 +17,7 @@ class ArticleController extends Controller
 {
     /**
      * @Route("/", name="article_index", methods="GET")
+     *
      */
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -52,7 +53,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article): Response
     {
-        return $this->render('article/show.html.twig', ['article' => $article]);
+        return $this->render('article/show.html.twig', [
+            'article' => $article,
+        ]);
     }
 
     /**

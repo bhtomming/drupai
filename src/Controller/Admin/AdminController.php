@@ -10,7 +10,18 @@ namespace App\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdmin;
 
+
 class AdminController extends BaseAdmin
 {
+    public function updateEntity($entity)
+    {
+        $class = get_class($entity);
+        $methods = get_class_methods($class);
+        if(in_array('setUpdatedAt',$methods))
+        {
+            $entity->setUpdatedAt(new \DateTime('now'));
+        }
+        return parent::updateEntity($entity);
+    }
 
 }

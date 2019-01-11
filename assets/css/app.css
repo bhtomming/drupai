@@ -1,6 +1,9 @@
 body {
     background-color: lightgray;
 }
+.container img{
+    max-width: 100%;
+}
 .card-icon{
     font-size: 78px;
     color: #007bff;

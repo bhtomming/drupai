@@ -1,7 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}最新动态_{{ parent() }}{% endblock %}
-
+{% if category is defined %}
+{% block keywords %}{{ category.keywords }}_{{ parent() }}{% endblock %}
+{% block description %}{{ category.description }}_{{ parent() }}{% endblock %}
+{% endif %}
 {% block body %}
     <div class="container my-5">
         <ul class="list-group list-group-flush">

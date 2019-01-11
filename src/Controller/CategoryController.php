@@ -23,7 +23,10 @@ class CategoryController extends Controller
     public function index(Category $category): Response
     {
         $articles = $category->getArticles();
-        return $this->render('news/list.html.twig', ['articles' => $articles]);
+        return $this->render('category/list.html.twig', [
+            'articles' => $articles,
+            'category' => $category,
+        ]);
     }
 
     /**
