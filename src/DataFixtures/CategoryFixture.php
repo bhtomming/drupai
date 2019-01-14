@@ -38,7 +38,6 @@ class CategoryFixture extends Fixture
             $category->setSlug($this->pinyin->getChineseChar($taxonomy[0]));
             $category->setCreatedAt(new \DateTime('now'));
             $manager->persist($category);
-
         }
 
         $manager->flush();

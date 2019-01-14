@@ -24,7 +24,7 @@ class Category extends PageMeta
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Article", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
     private $articles;
 
@@ -55,7 +55,7 @@ class Category extends PageMeta
 
     public function __toString() :string
     {
-        return $this->title;
+        return $this->title ? $this->title : 'Category';
     }
 
     public function addArticle(Article $article)
@@ -78,4 +78,6 @@ class Category extends PageMeta
     {
         return $this->articles;
     }
+
+
 }

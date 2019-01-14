@@ -37,3 +37,7 @@ services:
     app.pinyin:
         class: App\Services\PinYin
         public: true
+
+    App\Services\FileUploader:
+        arguments:
+            $targetDirectory: '%app.path.article_images%'

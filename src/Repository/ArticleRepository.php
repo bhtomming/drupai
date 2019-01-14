@@ -58,7 +58,7 @@ class ArticleRepository extends ServiceEntityRepository
                 SELECT a, u, g
                 FROM App:Article a
                 JOIN a.author u
-                LEFT JOIN a.categories g
+                LEFT JOIN a.category g
                 WHERE a.createdAt <= :now
                 ORDER BY a.createdAt DESC
             ')
@@ -80,7 +80,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function findByCategory($category)
     {
         return $this->createQueryBuilder('a')
-            ->join('a.categories','g')
+            ->join('a.category','g')
             ->where('g.id=:c')
             ->setParameter('c',$category)
             ->orderBy('a.createdAt','DESC')

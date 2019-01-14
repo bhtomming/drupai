@@ -43,7 +43,7 @@ class Migrate0ldData extends Fixture
             $bodyData[$index]  = $page;
             $sql = "select nid,title,created,changed from drun_node where nid = {$bodyData[$index][0]}";
             $titles = $conn->query($sql)->fetch_row();
-            $sql_alias = "select alias from drun_url_alias where source = 'node\/{$page[0]}'";
+            $sql_alias = "select alias from drun_url_alias where source = 'node/{$page[0]}'";
             $alias = $conn->query($sql_alias)->fetch_row();
             $sql_cate = "select tid from drun_taxonomy_index where nid = {$page[0]}";
 
@@ -62,11 +62,11 @@ class Migrate0ldData extends Fixture
                 continue;
             }
             $category = $manager->getRepository(Category::class)->find($taxonomy[0]);
-            if(!$category instanceof Category){
-                continue;
+            if($category instanceof Category){
+                $article->setCategory($category);
             }
 
-            $article->addCategory($category);
+
             $manager->persist($article);
         }
         $manager->flush();

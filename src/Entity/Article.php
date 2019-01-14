@@ -6,15 +6,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- * @Vich\Uploadable
+ *
  */
 class Article extends PageMeta
 {
     public const NUM_ITEMS = 25;
+    const IMAGE_DIR = "uploads/articles/images";
 
     /**
      * @ORM\Id()
@@ -38,11 +40,8 @@ class Article extends PageMeta
      */
     private $titleImg;
 
-    /**
-     * @Vich\UploadableField(mapping="article_titleImg", fileNameProperty="titleImg")
-     * @var File
-     */
-    private $imageFile;
+    private $image;
+
 
     /**
      * @ORM\Column(type="text")
@@ -63,18 +62,38 @@ class Article extends PageMeta
     private $oldLink;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", cascade={"persist"},inversedBy="articles")
-     * @ORM\JoinTable(name="article_category")
-     * @ORM\OrderBy({"createdAt": "ASC"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", cascade={"persist"},inversedBy="articles")
      */
-    private $categories;
+    private $category;
 
 
     public function __construct()
     {
         parent::__construct();
         $this->setCreatedAt(new \DateTime('now'));
-        $this->categories = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->title ? $this->title : 'Article';
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setImage(UploadedFile $file = null){
+        $this->image = $file;
+    }
+
+    /**
+     * @return UploadedFile|null
+     */
+    public function getImage(){
+        return $this->image;
+    }
+
+    public function createImg(){
+        return "<img src='{$this->titleImg}' />";
     }
 
     public function getId()
@@ -159,50 +178,18 @@ class Article extends PageMeta
     }
 
 
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategories(): Collection
+
+    public function getCategory()
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function addCategory(?Category ...$categories): self
-    {
-        foreach ($categories as $category){
-            if (!$this->categories->contains($category)) {
-                $this->categories[] = $category;
-            }
-        }
-        return $this;
-    }
 
-    public function removeCategory(Category $category): self
+    public function setCategory(Category $category): self
     {
-        if ($this->categories->contains($category)) {
-            $this->categories->removeElement($category);
-        }
+        $category->addArticle($this);
+        $this->category = $category;
 
         return $this;
     }
-
-    public function setImageFile(File $image = null)
-    {
-        $this->imageFile = $image;
-
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-
 }

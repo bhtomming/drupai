@@ -1,8 +1,0 @@
-parameters:
-    app.path.article_images: /uploads/images/articles
-vich_uploader:
-    db_driver: orm
-    mappings:
-        article_titleImg:
-            uri_prefix:         '%app.path.article_images%'
-            upload_destination: '%kernel.root_dir%/../public%app.path.article_images%'

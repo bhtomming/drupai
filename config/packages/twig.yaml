@@ -3,4 +3,4 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        article_path: '%app.path.article_images%'
+        article_image: '%app.path.article_images%'
