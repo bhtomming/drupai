@@ -64,6 +64,9 @@ a:hover{
 .bg-dark a{
     color: #fff;
 }
+#page-article img{
+    max-width: 100%;
+}
 
 /*********首页模板块*****************/
 .nei_c {
