@@ -15,9 +15,11 @@
                 <p class="py-md-3">{{ article.content |raw }}</p>
             </div>
             {% block siderbar %}
+                {% if article.category %}
                 <div class="col-md-3">
                     {{ relations(article.category) }}
                 </div>
+                {% endif %}
             {% endblock %}
         </div>
     </div>
