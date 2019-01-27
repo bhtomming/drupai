@@ -79,8 +79,12 @@ use Doctrine\ORM\Mapping as ORM;
         return $this->description;
     }
 
-    public function setReadNum(?string $readNum) :self
+    public function setReadNum(?string $readNum = null) :self
     {
+        if($readNum == null ){
+            $this->readNum++;
+            return $this;
+        }
         $this->readNum = $readNum;
         return $this;
     }

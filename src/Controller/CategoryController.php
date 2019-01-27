@@ -9,6 +9,7 @@ use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -20,8 +21,12 @@ class CategoryController extends Controller
      * @Route("/", name="category_index", methods="GET")
      * @Route("/{slug}", name="category_show", methods="GET")
      */
-    public function index(Category $category): Response
+    public function index(Category $category,Request $request): Response
     {
+        $session = $request->getSession();
+        $path = $request->getPathInfo();
+        $this->isRead($session,$path,$category);
+
         $articles = $category->getArticles();
         return $this->render('category/list.html.twig', [
             'articles' => $articles,
@@ -94,4 +99,23 @@ class CategoryController extends Controller
 
         return $this->redirectToRoute('category_index');
     }*/
+    public function isRead(SessionInterface $session, $path, $page){
+        $em = $this->getDoctrine()->getManager();
+        if(!$session->has('read')){
+            //从来没有过会话，添加会话信息，文章阅读量加1
+            $page->setReadNum();
+            $session->set('read',array($path));
+        }
+        if($session->has('read') && !in_array($path,$session->get('read'))){
+            $readLog = $session->get('read');
+            if(!in_array($path,$readLog)){
+                //本次会话没有阅读过,文章阅读量加1
+                $page->setReadNum();
+                $readLog[] = $path;
+                $session->set('read',$readLog);
+            }
+        }
+        $em->persist($page);
+        $em->flush();
+    }
 }

@@ -1,30 +1,29 @@
 sonata_admin:
     title: 'drupai Admin'
     dashboard:
-        groups:
-            news:
-                label: 文章管理
-                label_catalogue: ~
-                items:
-                    - admin.article
-                    - admin.category
-#        blocks:
-#            - { type: sonata.admin.block.admin_list, position: left }
+        blocks:
+            - { type: sonata.admin.block.admin_list, position: left }
 
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
-            contexts: [admin]
+            contexts: [sonata.admin]
 
 services:
-    admin.category:
+    sonata.admin.category:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\Category, ~]
         tags:
           - { name: sonata.admin, manager_type: orm, label: 分类管理 }
 
-    admin.article:
+    sonata.admin.article:
         class: App\Admin\ArticleAdmin
         arguments: [~, App\Entity\Article, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: '文章内容', icon: fa-file }
+            - { name: sonata.admin, manager_type: orm, label: '文章内容' }
+
+    sonata.admin.visit:
+        class: App\Admin\VisitLogAdmin
+        arguments: [~, App\Entity\UserLog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '来访记录' }

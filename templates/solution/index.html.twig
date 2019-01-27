@@ -1,0 +1,456 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}企业网站解决方案{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('/build/css/solution.css') }}">
+{% endblock %}
+
+
+
+{% block body %}
+<style>
+    /*黄色*/
+    #floatDivBoxs{background:#fff;}
+    #floatDivBoxs .floatDtt{background:#ffcc00;color:#fff;}
+    #floatDivBoxs .floatDtxt p{ color: #ffcc00;}
+    /*原来的基础上改动的样式*/
+    .floatDbg{background:url(/build/images/online_botbg.jpg) no-repeat;height: 20px;}
+    .floatShadow{ background:#fff; }
+    /*	#rightArrow{ background:url(/testpc/theme1/online_arrow.jpg) no-repeat; }*/
+    /*新加的样式*/
+    #sidebar{width:50px;} /*伸展和收缩的可点击区域的宽度，等毒调用图片的宽度*/
+    .close_btn{position: absolute;top:0;left:-50px;} /*向右收缩的点击区域(图片的位置调整)*/
+    #first_li{background: #ffcc00;height:45px;margin-top: 0;line-height: 45px;}
+    #first_li .title{padding-top: 10px;padding-left:10px;}
+    #detail_img{padding-top: 0px;font-size: 16px;}
+    #detail_img ul li{padding-left:10px;}
+    .con_tit{width: 100%;}
+    .case .hd { border: 2px solid #56C2BB; border-left:none; border-right:none; clear: both; overflow: hidden; text-align: center;}
+    .case .hd ul{margin: 0 auto; width: 805px;}
+    .case .hd li { float: left; font-family: Microsoft YaHei; font-size: 16px; height: 50px; line-height: 50px; position: relative; text-align: center; width: 130px; cursor: pointer;}
+    .case .hd_sel{background:#56C2BB; color:#fff;}
+    .case_com{ display: none;}
+    .case_sel{display: block;}
+    .case_contant{overflow: hidden;}
+</style>
+<link rel="stylesheet" type="text/css" href="{{ asset('build/css/pro_case.css') }}"/>
+<script>
+
+</script>
+
+<div class="bread_nav"></div>
+<div class="hai_case" style="margin-top: 25px; margin-bottom: 0;">
+    <p>解决方案</p>
+    <span style="letter-spacing:1px;">Three in one station</span>
+    <div class="case">
+        <div class="hd">
+            <ul>
+                <li class="hd_sel">多合一建站</li>
+                <li>B2C商城</li>
+                <li>全网分销</li>
+                <li style="width: 150px;">营销型网站2.0</li>
+                <li>手机APP</li>
+                <li>小程序</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--contant start-->
+<div class="case_contant">
+    <div class="case_com case_sel case_one">
+        <div class="solu_one">
+            <div class="part_a">
+                <div class="a_left">
+                    <img src="/build/images/solu_one.gif" />
+                </div>
+                <div class="a_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <img src="/build/images/bg5.png" />
+                        <div class="ri_txt">
+                            <h3>多合一建站</h3>
+                            <p>在线设计，自由拖拽</p>
+                            <p>无需专业技术即可完成精美网站</p>
+                        </div>
+                        <p class="clk"><a href="http://shop.drupai.com/siteusercase.html">查看更多案例</a></p>
+                        <p class="clk1"><a href="http://shop.drupai.com/custom_25636.html">查看规格表</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_two">
+            <div class="part_b">
+                <div class="b_left">
+                    <div class="li_txt">
+                        <p>模板随时可以更换</p>
+                        <p>更有区块菜单实现炫目效果</p>
+                    </div>
+                </div>
+                <div class="b_right">
+                    <div>
+                        <img src="/build/images/solu_two.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_three">
+            <div class="part_c">
+                <div class="c_left">
+                    <img src="/build/images/solu_three.png" />
+                </div>
+                <div class="c_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <div class="ri_txt">
+                            <p>提供嵌入功能让您更灵活实现系统没有功能的嵌入使用,</p>
+                            <p>更可把老站点与多合一绑定跨系统实现智能网站多合一,</p>
+                            <p>提供丰富强大的互动功能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_four">
+            <div class="part_d">
+                <div class="d_top">多终端覆盖, 数据统一, 方便管理 </div>
+                <div class="d_left">
+                    <img src="/build/images/solu_four.png" />
+                </div>
+            </div>
+        </div>
+        <div class="solu_five">
+            <div class="part_e">
+                <div class="e_left">
+                    <div class="li_txt">
+                        <p>提供超高性价比，主机+程序+模板整合解决方案;</p>
+                        <p>系统每日进行更新，永远跟进最新技术发展，用户购买期内新升级功能免费使用;</p>
+                        <p>多合一网站可以随时无缝升级到分站站群的营销型网站2.0， 让网站流量暴涨，排名一飞冲天;</p>
+                        <p>多合一网站可以随时升级制作小程序, APP，实现更多终端覆盖，提升客户体验， 提升品牌形象。</p>
+                    </div>
+                </div>
+                <div class="e_right">
+                    <div>
+                        <img src="/build/images/solu_five.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--one end -->
+
+    <div class="case_com case_two">
+        <div class="solu_one">
+            <div class="part_a">
+                <div class="a_left">
+                    <img src="/build/images/ds1.png" />
+                </div>
+                <div class="a_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <img src="/build/images/bg5.png" />
+                        <div class="ri_txt">
+                            <h3>B2C商城</h3>
+                            <p>多变的分类</p>
+                            <p>支持图片</p>
+                            <p>文章等同步展示宣传</p>
+                        </div>
+                        <p class="clk"><a href="http://shop.drupai.com/siteusercase.html">查看更多案例</a></p>
+                        <p class="clk1"><a href="http://shop.drupai.com/custom_25636.html">查看规格表</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_two">
+            <div class="part_b">
+                <div class="b_left">
+                    <div class="li_txt">
+                        <p>预置多个支付通道, 除支付宝,微支付, 也包括海外paypal, 和财付通, 银行卡直连, 网银在线等.</p>
+                        <p>并支持货到付款, 到店支付,可设置使用人民币, 美金, 英镑, 欧元, 日元等主流货币.</p>
+                    </div>
+                </div>
+                <div class="b_right">
+                    <div>
+                        <img src="/build/images/ds2.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_three">
+            <div class="part_c">
+                <div class="c_left">
+                    <img src="/build/images/ds3.png" />
+                </div>
+                <div class="c_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <div class="ri_txt">
+                            <p>提供订单状态自定义功能, 适应不同行业使用</p>
+                            <p>完善的评价管理功能, 让您的商城好评如潮</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_four">
+            <div class="part_d">
+                <div class="d_left">
+                    <div class="li_txt">
+                        <p>淘宝产品导入功能 订单数据导出 会员数据导出,</p>
+                        <p> 最低购买量控制功能, 让批发和零售企业均可使用.</p>
+                    </div>
+                </div>
+                <div class="d_right">
+                    <div>
+                        <img src="/build/images/ds4.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_five">
+            <div class="part_e">
+                <div class="e_left">
+                    <img src="/build/images/ds5.png" />
+                </div>
+                <div class="e_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <div class="ri_txt">
+                            <p>更有团购,秒杀丰富的强大功能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_six">
+            <div class="part_f">
+                <div class="f_left">
+                    <div class="li_txt">
+                        <p>大转盘,优惠券,刮刮卡等促销活动随时使用</p>
+                    </div>
+                </div>
+                <div class="f_right">
+                    <div>
+                        <img src="/build/images/ds6.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_seven">
+            <div class="part_g">
+                <div class="g_top">
+                    <p>统一管理多终端订单, 产品统一展示, 库存同步，让您轻松管理多个不同终端的商城</p>
+                    <p>提供国内最高性价比的入门级B2C商城解决方案，让你轻松开启电子商务第一步</p>
+                    <p>可随时无缝升级到三级分销，全网分销， 让您商城推广更进一步,可随时升级制作小程序, APP，低成本覆盖更多客户， 提升企业形象</p>
+                </div>
+                <div class="g_left" style="text-align:center;">
+                    <img src="/build/images/ds7.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--two end -->
+
+    <div class="case_com case_three">
+        <div class="solu_one">
+            <div class="part_a">
+                <div class="a_top">不只是微分销, 全网分销覆盖PC, 手机, 微信, 让你实现全网立体营销</div>
+                <div class="a_btn">
+                    <p><a class="b_check" href="http://shop.drupai.com/custom_25636.html">查看规格表</a></p>
+                    <p><a class="b_more" href="http://shop.drupai.com/siteusercase.html">查看更多案例</a></p>
+                </div>
+                <div class="a_left">
+                    <img src="/build/images/fx1.png" style="display: block;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="solu_two">
+            <div class="part_b">
+                <div class="b_left">
+                    <img src="/build/images/fx2.png" />
+                </div>
+                <div class="b_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <div class="ri_txt">
+                            <p>推广员系统全网统一, 推广员可通过PC,手机, 微信查看自己的推广数据, 数据同步统一</p>
+                            <p>订单系统全网统一, 无论是PC,还是手机, 微信的订单数据都同步统一</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="solu_three">
+            <div class="part_c">
+                <div class="c_top">
+                    <p>奖金系统全网统一, 推广员可在PC,手机, 微信查看自己的奖金数据,数据同步统一</p>
+                    <p>具有推广员子店铺(子站)功能, 推广员都有一个多合一子店铺,  可自主设置客服,联系电话, 地址等</p>
+                </div>
+                <div class="c_left">
+                    <img src="/build/images/fx4.png" />
+                </div>
+            </div>
+        </div>
+
+        <div class="solu_four">
+            <div class="part_d">
+                <div class="d_left">
+                    <div class="li_txt">
+                        <p>多级分销，三级分润，自动锁定，支持提现</p>
+                        <p>与商城系统完美融合，无缝升级，让你的会员成为分销商</p>
+                        <p>更有注册推广, 分享推广, 实现更灵活的推广方式</p>
+                    </div>
+                </div>
+                <div class="d_right">
+                    <div>
+                        <img src="/build/images/fx3.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--three end -->
+
+    <div class="case_com case_four">
+        <div class="solu_four">
+            <div class="part_d">
+                <div class="d_top">
+                    <p>营销型网站2.0 可有效提升网站流量</p>
+                    <p>特有分站系统, 可自动建立大量分站, 是传统站群方式的1%工作量</p>
+                </div>
+                <div class="d_btn">
+                    <p><a class="b_check" href="http://shop.drupai.com/custom_25636.html">查看规格表</a></p>
+                    <p><a class="b_more" href="http://shop.drupai.com/siteusercase.html">查看更多案例</a></p>
+                </div>
+                <div class="d_left">
+                    <img src="/build/images/yx1.png" />
+                </div>
+            </div>
+        </div>
+        <div class="solu_one">
+            <div class="part_a">
+                <div class="a_left">
+                    <img src="/build/images/yx2.png" />
+                </div>
+                <div class="a_right">
+                    <div style="width: 100%; height: 100%; position: relative;">
+                        <div class="ri_txt">
+                            <p>所有分站统一维护, 统一管理, 节省您的宝贵时间 </p>
+                            <p>系统不限分站数量, 让您的优化更得心应手</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_two">
+            <div class="part_b">
+                <div class="b_left">
+                    <div class="li_txt">
+                        <p>通过分站轻松实现1000个以上长尾关键词覆盖</p>
+                        <p>分站可进行独立SEO优化, 可独立设置客服,联系方式, 可独立使用顶级域名</p>
+                    </div>
+                </div>
+                <div class="b_right">
+                    <div>
+                        <img src="/build/images/yx3.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--four end -->
+
+    <div class="case_com case_five">
+        <div class="solu_one">
+            <div class="part_a">
+                <div class="a_top">
+                    <p>只要有手机网站就可制作APP ，改版手机站即可改版APP</p>
+                    <p>上传APP市场, 超低成本，入门之选</p>
+                    <p>支持苹果APP和安卓APP</p>
+                </div>
+                <div class="a_btn">
+                    <p><a class="b_check" href="http://shop.drupai.com/custom_25636.html">查看规格表</a></p>
+                    <p><a class="b_more" href="http://shop.drupai.com/siteusercase.html">查看更多案例</a></p>
+                </div>
+                <div class="a_left">
+                    <img src="/build/images/wx1.png" />
+                </div>
+            </div>
+        </div>
+
+        <div class="solu_two">
+            <div class="part_b">
+                <div class="b_top">
+                    <p>与网站数据统一</p>
+                    <p>与微信公众号, 小程序数据统一</p>
+                </div>
+                <div class="b_left">
+                    <img src="/build/images/wx3.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--five end -->
+
+    <div class="case_com case_six">
+        <div class="solu_one">
+            <div class="part_a">
+                <div class="a_top">
+                    <p>与网站, 微信,APP数据统一</p>
+                    <p>具有账户绑定功能,可轻松绑定既有用户</p>
+                </div>
+                <div class="a_btn">
+                    <p><a class="b_check" href="http://shop.drupai.com/custom_25636.html">查看规格表</a></p>
+                    <p><a class="b_more" href="http://shop.drupai.com/siteusercase.html">查看更多案例</a></p>
+                </div>
+                <div class="a_left">
+                    <img src="/build/images/xc1.png" />
+                </div>
+            </div>
+        </div>
+        <div class="solu_two">
+            <div class="part_b">
+                <div class="b_left">
+                    <div class="li_txt">
+                        <p>多种颜色可选</p>
+                        <p>快速开发,7天完成</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="solu_three">
+            <div class="part_c">
+                <div class="c_top">
+                    <p>支持分类,附近的小程序,访问统计,</p>
+                    <p>分享小程序给好友, 到朋友圈</p>
+                </div>
+                <div class="c_left">
+                    <img src="/build/images/xc3.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--six end -->
+
+</div>
+<!--contant end-->
+
+<style>
+    .index_bottom{ background: #323232;}
+    .index_bottom p{background: none; color:#aeaeae !important; font-family:"Microsoft Yahei","微软雅黑",Arial,Helvetica,sans-serif;}
+    .index_bottom a{color: #fff; font-family:"Microsoft Yahei","微软雅黑",Arial,Helvetica,sans-serif;}
+    .index_foot .foot_p{color: #909090; font-family:"Microsoft Yahei","微软雅黑",Arial,Helvetica,sans-serif;}
+    .index_foot{height:75px;}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/jquery-1.12.2.min.js') }}"></script>
+    <script>
+        $(function(){
+            $('.hd li').click(function(){
+                $(this).addClass('hd_sel').siblings().removeClass('hd_sel');
+                var ca_index=$(this).index();
+                $('.case_contant .case_com').eq(ca_index).css({'display':'block'}).siblings().css({'display':'none'});
+            })
+        });
+
+    </script>
+{% endblock %}

@@ -31,6 +31,7 @@ class ArticleAdmin extends AbstractAdmin
             ->addIdentifier('title')
             ->add('category.title')
             ->add('summary')
+            ->add('readNum')
         ;
     }
 

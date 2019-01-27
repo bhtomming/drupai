@@ -8,6 +8,7 @@ use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -51,8 +52,11 @@ class ArticleController extends Controller
      * @Route("/{slug}", name="article_show", methods="GET")
      *
      */
-    public function show(Article $article): Response
+    public function show(Article $article,Request $request): Response
     {
+        $session = $request->getSession();
+        $path = $request->getPathInfo();
+        $this->isRead($session,$path,$article);
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
@@ -92,4 +96,24 @@ class ArticleController extends Controller
 
         return $this->redirectToRoute('article_index');
     }*/
+
+    public function isRead(SessionInterface $session, $path, $page){
+        $em = $this->getDoctrine()->getManager();
+        if(!$session->has('read')){
+            //从来没有过会话，添加会话信息，文章阅读量加1
+            $page->setReadNum();
+            $session->set('read',array($path));
+        }
+        if($session->has('read') && !in_array($path,$session->get('read'))){
+            $readLog = $session->get('read');
+            if(!in_array($path,$readLog)){
+                //本次会话没有阅读过,文章阅读量加1
+                $page->setReadNum();
+                $readLog[] = $path;
+                $session->set('read',$readLog);
+            }
+        }
+        $em->persist($page);
+        $em->flush();
+    }
 }

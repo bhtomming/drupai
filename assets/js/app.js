@@ -7,16 +7,13 @@
 
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/global.scss');
-require('../images/case.jpg');
 
-//require('../css/app.css');
-
-const $ = require('jquery');
-require('bootstrap');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// var $ = require('jquery');
+ const $ = require('jquery');
+require('bootstrap');
 $(document).ready(function() {
-	$('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover();
 });
-//console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

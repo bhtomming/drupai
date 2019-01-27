@@ -26,6 +26,7 @@ class CategoryAdmin extends AbstractAdmin
                 'label'=> '关键词'))
             ->add('description',TextareaType::class,array(
                 'label'=> '描述'))
+
         ;
     }
 
@@ -41,7 +42,9 @@ class CategoryAdmin extends AbstractAdmin
         ))
             ->add('description',null,array(
                 'label' => '描述'
-            ));
+            ))
+            ->add('readNum')
+        ;
     }
 
 }

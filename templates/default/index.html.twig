@@ -1,11 +1,37 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}首页_{{ parent() }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/css/swiper.min.css') }}">
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     {{ include('/default/swiper.html.twig') }}
     {{ include('/default/business.html.twig') }}
-    {{ include('/default/case.html.twig') }}
-    {{ include('/default/technology.html.twig') }}
+    {{ include('/default/template.html.twig') }}
+    {{ include('/default/integlar.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('build/js/swiper.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            var frontSwiper = new Swiper('#swiper-container-hd',{
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination'
+                },
+                preventLinksPropagation: true,
+                autoplay:{
+                    delay:4000,
+                    disableOnInteraction: false
+                },
+                touchMoveStopPropagation: false
+            });
+        });
+    </script>
 {% endblock %}
 

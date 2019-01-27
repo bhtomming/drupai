@@ -4,21 +4,19 @@
 {% block title %}{{ article.title }}_{{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container" id="page-article">
         <div class="row my-md-5">
             <div class="col-md-9">
                 <h1 class="text-center">{{ article.title }}</h1>
-                <blockquote class="blockquote text-center">
+                <blockquote class="blockquote">
                     <p>{{ article.summary }}</p>
-                    <footer class="blockquote-footer">作者:{{ article.author }}</footer>
+                    <footer class="blockquote-footer text-right">作者:{{ article.author }}</footer>
                 </blockquote>
                 <p class="py-md-3">{{ article.content |raw }}</p>
             </div>
             {% block siderbar %}
                 <div class="col-md-3">
-                    {% for category in article.categories %}
-                    {{ relations(category) }}
-                    {% endfor %}
+                    {{ relations(article.category) }}
                 </div>
             {% endblock %}
         </div>

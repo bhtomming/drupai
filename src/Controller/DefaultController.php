@@ -4,6 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+
+
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -61,4 +66,62 @@ class DefaultController extends Controller
     public function contact(){
         return $this->render('default/contact.html.twig');
     }
+
+    /**
+     * @Route("/solution/", name="solution")
+     */
+    public function solution(){
+        return $this->render('solution/index.html.twig');
+    }
+
+    /**
+     * @Route("/test/", name="test")
+     */
+    public function testCrawlar(){
+        $client = new Client();
+        $source = $client->request('GET','http://shop.drupai.com/sitetemplate.html');
+        dump($source);
+        //$crawler = new Crawler($source);
+        //获取模板链接
+        $templatesLink = $source->selectLink('预览');
+        //模板链接数组
+        $tempLinks = array();
+        $links = $templatesLink->links();
+
+        foreach ($links as $link){
+            $tplink = $link->getUri();
+            $tempLinks[] = $tplink;
+            $this->saveFile($tplink);
+        }
+
+        dump($tempLinks);
+        exit;
+    }
+
+    //保存文件,可以保存网络文件及本地文件
+    public function saveFile($dom,$fileName){
+        $fileControl = new Filesystem();
+        $fileControl->copy($dom,$fileName);
+    }
+
+    //分析链接
+    public function analysisLink($url){
+        //绝对链接
+        if(stripos($url,'http') || stripos($url,'https')){
+
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
