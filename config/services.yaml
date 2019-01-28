@@ -41,3 +41,11 @@ services:
     App\Services\FileUploader:
         arguments:
             $targetDirectory: '%app.path.article_images%'
+
+    app.sitemap.article_subscriber:
+        class: App\EventListener\SitemapSubscriber
+        arguments:
+        - "@router"
+        - "@doctrine"
+        tags:
+        - { name: "kernel.event_subscriber", priority: 100 }

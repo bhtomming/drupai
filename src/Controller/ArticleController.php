@@ -52,7 +52,7 @@ class ArticleController extends Controller
      * @Route("/{slug}", name="article_show", methods="GET")
      *
      */
-    public function show(Article $article,Request $request): Response
+    public function show(Article $article, Request $request): Response
     {
         $session = $request->getSession();
         $path = $request->getPathInfo();

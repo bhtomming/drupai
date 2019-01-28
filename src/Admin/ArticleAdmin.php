@@ -12,6 +12,7 @@ namespace App\Admin;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Services\FileUploader;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -49,7 +50,11 @@ class ArticleAdmin extends AbstractAdmin
                 'class' => Category::class,
                 'choice_label' => 'title',
             ])
-            ->add('content')
+            ->add('content',CKEditorType::class,array(
+                'config' => array(
+                    'uiColor' => '#e4e1f9'
+                )
+            ))
         ;
     }
 

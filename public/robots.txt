@@ -1,0 +1,55 @@
+#
+# robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+#
+# This file will be ignored unless it is at the root of your host:
+# Used:    http://example.com/robots.txt
+# Ignored: http://example.com/site/robots.txt
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Crawl-delay: 10
+# CSS, JS, Images
+Allow: /build/*.css$
+Allow: /build/*.css?
+Allow: /build/*.js$
+Allow: /build/*.js?
+Allow: /build/*.gif
+Allow: /uploads/*.jpg
+Allow: /uploads/*.jpeg
+Allow: /uploads/*.png
+Allow: /bundles/*.css$
+Allow: /bundles/*.css?
+Allow: /bundles/*.js$
+Allow: /bundles/*.js?
+Allow: /bundles/*.gif
+Allow: /bundles/*.jpg
+Allow: /bundles/*.jpeg
+Allow: /bundles/*.png
+Allow: /article/*.html
+Allow: /category/*.html
+Allow: /sitemap.xml
+Allow: /sitemap.*.xml
+
+# Paths (clean URLs)
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /logout/
+
+# Files
+Disallow: /CHANGELOG.txt
+Disallow: /INSTALL.mysql.txt
+Disallow: /install.php
+Disallow: /INSTALL.txt
+Disallow: /LICENSE.txt
+Disallow: /MAINTAINERS.txt
+Disallow: /update.php
+Disallow: /UPGRADE.txt
+
