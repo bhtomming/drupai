@@ -67,6 +67,11 @@ a:hover{
 #page-article img{
     max-width: 100%;
 }
+.about-content p{
+    text-indent: 2em;
+    line-height: 2;
+    font-size: 18px;
+}
 
 /*********首页模板块*****************/
 .nei_c {

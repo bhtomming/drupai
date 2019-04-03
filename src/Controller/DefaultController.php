@@ -61,6 +61,13 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/about_us/", name="about", options={"sitemap":true})
+     */
+    public function about(){
+        return $this->render('default/about.html.twig');
+    }
+
+    /**
      * @Route("/contact/", name="contact", options={"sitemap":true})
      */
     public function contact(){
