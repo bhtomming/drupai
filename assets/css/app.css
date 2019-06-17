@@ -11,14 +11,12 @@ body {
     font-size: 78px;
     color: #007bff;
 }
-
 .case-wrapper{
     position: relative;
     padding-left: 0!important;
     padding-right: 0!important;
     overflow: hidden;
 }
-
 .case-swiper{
     background: rgba(0,0,0,0.5);
     position: absolute;
@@ -72,7 +70,6 @@ a:hover{
     line-height: 2;
     font-size: 18px;
 }
-
 /*********首页模板块*****************/
 .nei_c {
     width: 1300px;
@@ -149,7 +146,6 @@ a:hover{
     position: absolute;
     width: 251px;
     height: 173px;
-    padding: 0;
     left: 0;
     top: 173px;
     background: #1EB5AC;

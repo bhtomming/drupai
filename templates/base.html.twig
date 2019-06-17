@@ -7,7 +7,9 @@
         <meta name="description" content="{% block description %}北海助派网络信息技术有限公司是一家有实力的网站制作、小程序制作、微信公众号制作、微信营销推广公司，助派网络为无数客户成功进行营销推广活动。{% endblock %}">
         <title>{% block title %}助派网络信息技术【官网】{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+            {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            {#<link rel="stylesheet" href="{{ asset('build/css/app.css') }}">#}
         {% endblock %}
     </head>
     <body>
@@ -18,7 +20,8 @@
         {% endblock %}
     {{ include('footer.html.twig') }}
         {% block javascripts %}
-            <script src="{{ asset('build/app.js') }}"></script>
+            {{ encore_entry_script_tags('app') }}
+            {#<script src="{{ asset('build/js/bootstrap.min.js') }}"></script>#}
         {% endblock %}
     </body>
 </html>

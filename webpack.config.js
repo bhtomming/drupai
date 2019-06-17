@@ -2,6 +2,7 @@ var Encore = require('@symfony/webpack-encore');
 
 
 Encore.configureRuntimeEnvironment('dev')
+
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
     // public path used by the web server to access the output path
@@ -18,7 +19,10 @@ Encore.configureRuntimeEnvironment('dev')
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
+    .enableStylusLoader()
+    .enableLessLoader()
     .enableSassLoader()
+
     .addEntry('app', './assets/js/app.js')
     .copyFiles({
         from: './assets/'

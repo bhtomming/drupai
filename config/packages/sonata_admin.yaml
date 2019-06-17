@@ -4,6 +4,7 @@ sonata_admin:
         blocks:
             - { type: sonata.admin.block.admin_list, position: left }
 
+
 sonata_block:
     blocks:
         sonata.admin.block.admin_list:
@@ -18,12 +19,16 @@ services:
 
     sonata.admin.article:
         class: App\Admin\ArticleAdmin
-        arguments: [~, App\Entity\Article, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: '文章内容' }
+        arguments:
+            - ~
+            - App\Entity\Article
+            - App\Admin\ArticleAdminController
 
     sonata.admin.visit:
         class: App\Admin\VisitLogAdmin
         arguments: [~, App\Entity\UserLog, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: '来访记录' }
+

@@ -57,7 +57,7 @@ class Article extends PageMeta
     private $author;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $oldLink;
 

@@ -123,6 +123,7 @@ use Doctrine\ORM\Mapping as ORM;
      public function __construct()
      {
          $this->readNum = 0;
+         $this->setCreatedAt(new \DateTime('now'));
      }
 
  }

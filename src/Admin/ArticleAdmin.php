@@ -12,6 +12,7 @@ namespace App\Admin;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Services\FileUploader;
+use App\Services\PinYin;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -23,16 +24,29 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ArticleAdmin extends AbstractAdmin
 {
+    protected $datagridValues = [
+        '_page' => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'updatedAt',
+    ];
 
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('createImg','html',[
-            'header_style' => 'width: 64px;'
-        ])
+        $list
+            ->addIdentifier('createImg','html',[
+            'header_style' => 'width: 64px; max-height: 80px;',
+            'label'=>'图片'
+            ])
             ->addIdentifier('title')
             ->add('category.title')
             ->add('summary')
             ->add('readNum')
+            ->add('updatedAt',null,[
+                'label'=>'修改时间',
+                'format'=>'Y年m月d日 H:i:s',
+                'timezone' => 'Asia/Shanghai',
+                'sortable'=>true,
+                ])
         ;
     }
 
@@ -66,6 +80,15 @@ class ArticleAdmin extends AbstractAdmin
                 'choice_label' => 'title',
             ])
         ;
+    }
+
+    public function create($object)
+    {
+        $pinyin = new PinYin();
+        assert($object instanceof Article);
+        $object->setSlug($pinyin->getChineseChar($object->getTitle()));
+
+        return parent::create($object);
     }
 
     public function toString($object)

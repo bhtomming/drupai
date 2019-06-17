@@ -9,6 +9,8 @@
 namespace App\Admin;
 
 
+use App\Entity\Category;
+use App\Services\PinYin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -43,8 +45,20 @@ class CategoryAdmin extends AbstractAdmin
             ->add('description',null,array(
                 'label' => '描述'
             ))
-            ->add('readNum')
+            ->add('slug',null,array(
+                'label' => '页面'
+            ))
+            ->add('浏览量')
         ;
     }
+
+    public function create($object)
+    {
+        $pinyin = new PinYin();
+        assert($object instanceof Category);
+        $object->setSlug($pinyin->getChineseChar($object->getTitle()));
+        return parent::create($object);
+    }
+
 
 }

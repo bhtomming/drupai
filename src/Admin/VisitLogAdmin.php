@@ -14,13 +14,24 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 
 class VisitLogAdmin extends AbstractAdmin
 {
+    protected $datagridValues = [
+        '_page' => 1,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    ];
+
     protected function configureListFields(ListMapper $list)
     {
-        $list->add('username')
-            ->add('currentUrl')
-            ->add('referrer')
-            ->add('action')
-            ->add('createdAt')
+        $list->add('username',null,['label'=>'用户'])
+            ->add('currentUrl',null,['label'=>'访问'])
+            ->add('referrer',null,['label'=>'来源'])
+            ->add('action',null,['label'=>'方式'])
+            ->add('createdAt',null,[
+                'label'=>'时间',
+                'format'=>'Y年m月d日 H:i:s',
+                'timezone' => 'Asia/Shanghai',
+                'sortable'=>true,
+            ])
             ;
     }
 

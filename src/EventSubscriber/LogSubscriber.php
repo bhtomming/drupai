@@ -31,6 +31,7 @@ class LogSubscriber implements EventSubscriberInterface
             $username = is_string($user) ? '匿名用户' : $user->getUsername();
             $userLog->setUsername($username);
             $userLog->setCurrentUrl($currentUrl);
+            $userLog->setIp($ip);
             $userLog->setReferrer($request->server->get('HTTP_REFERRER'));
             $userLog->setAction($request->getMethod());
             $userLog->setData(json_encode($request->request->all()));

@@ -46,6 +46,16 @@ class UserLog
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ip;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ipFrom;
+
     public function getId()
     {
         return $this->id;
@@ -119,6 +129,30 @@ class UserLog
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(?string $ip): self
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getIpFrom(): ?string
+    {
+        return $this->ipFrom;
+    }
+
+    public function setIpFrom(?string $ipFrom): self
+    {
+        $this->ipFrom = $ipFrom;
 
         return $this;
     }
