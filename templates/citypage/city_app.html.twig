@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ city_page.mainWord }}_{{ parent() }}{% endblock %}
+{% block keywords %}{{ city_page.keywords }}{% endblock %}
+{% block description %}{{ city_page.description }}{% endblock %}
+
+{% if city_page.parentPage %}
+    {% set parent = city_page.parentPage %}
+    {% if parent.parentPage  %}
+        {% set faparent = parent.parentPage %}
+    {% endif %}
+{% endif %}
+{% if city_page.subLinks %}
+    {% set sub_links = city_page.subLinks %}
+{% endif %}
+
+{% set reglink = 'http://shop.drupai.com/admin/signup.php' %}
+
+{% block body %}
+    <div class="container py-5" id="page-city-article">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">首页</a></li>
+                {% if  faparent is defined %}
+                    <li class="breadcrumb-item"><a href="{{ faparent.slug }}">{{ faparent.mainWord }}小程序制作</a></li>
+                {% endif %}
+                {% if parent is defined %}
+                <li class="breadcrumb-item"><a href="{{ parent.slug }}">{{ parent.mainWord }}小程序制作</a></li>
+                {% endif %}
+                <li class="breadcrumb-item active" aria-current="page">{{ city_page.mainWord }}小程序制作</li>
+            </ol>
+        </nav>
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">相关区域</div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for same_area in sub_links %}
+                                <div class="col-md-2 col-4">
+                                    <a  href="{{ same_area.slug }}">{{ same_area.mainWord }}</a>
+                                </div>
+                            {% else %}
+                                {% for same_city in parent.subLinks %}
+                                    <div class="col-md-2 col-4"><a  href="{{ same_city.slug }}">{{ same_city.mainWord }}</a></div>
+                                {% else %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-9">
+
+                <div class="card mb-3">
+                    <h1 class="card-header">助派网络营销推广助手-{{ city_page.mainWord }}小程序制作说明：</h1>
+                    <div class="card-body">
+                        <p class="py-md-3 text-indent-2">助派网络营销推广助手基于领先的多合一智能建站系统，以专业的在线服务精神，致力于向客户提供优质的网站建设，微信公众号开发，小程序制作为核心的服务和企业网站运营、推广解决方案，为{{ city_page.mainWord }}企业网站建设，微信公众号开发，小程序制作创造长期的价值和挖掘潜在的增长。</p>
+                        <blockquote class="blockquote">
+                            <footer class="blockquote-footer text-right">{{ city_page.createdAt | date("Y年m月d日") }}</footer>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        我们的产品
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="card-body row">
+                                <div class="col-md-3 text-center">
+                                    <img src="{{ asset('build/images/web-pc.jpg') }}" alt="标准小程序制作" class="img-thumbnail rounded">
+                                </div>
+                                <div class="col-md-9">
+                                    <h2 class="card-title">{{ city_page.mainWord }}企业标准小程序制作</h2>
+                                    <p class="card-text text-indent-2">标准小程序制作是为{{ city_page.mainWord }}的中小企型业提供标准化的小程序制作，主要功能包括展示公司简介、产品、品牌信息发布等，满足{{ city_page.mainWord }}企业对小程序所需的展示功能。</p>
+                                    <div class="text-right"><a href="{{ reglink }}" class="btn btn-outline-primary">立即注册</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="card-body row">
+                                <div class="col-md-3 text-center">
+                                    <img src="{{ asset('build/images/web-phone.jpg') }}" alt="小程序商城" class="img-thumbnail rounded">
+                                </div>
+                                <div class="col-md-9">
+                                    <h2 class="card-title">{{ city_page.mainWord }}企业小程序商城制作</h2>
+                                    <p class="card-text text-indent-2">小程序商城制作是为{{ city_page.mainWord }}的中小型企业提供小程序商城制作服务，主要功能包括适企业信息管理，菜单管理，轮播图、账户、产品、文章、交易、订单、会员等信息管理，满足{{ city_page.mainWord }}企业对小程序制作商城的需求。</p>
+                                    <div class="text-right"><a href="{{ reglink }}" class="btn btn-outline-primary">立即注册</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="card-body row">
+                                <div class="col-md-3 text-center">
+                                    <img src="{{ asset('build/images/web-th.jpg') }}" alt="小程序分销商城" class="img-thumbnail rounded">
+                                </div>
+                                <div class="col-md-9">
+                                    <h2 class="card-title">{{ city_page.mainWord }}企业小程序分销商城制作</h2>
+                                    <p class="card-text text-indent-2">小程序分销商城制作是为满足{{ city_page.mainWord }}的中小型企业对小程序制作分销商城的高要求而服务，主要功能包括企业信息管理、菜单管理、账户管理等标准小程序商城功能和分销功能， 是{{ city_page.mainWord }}企业做小程序分销平台的优选方案。</p>
+                                    <div class="text-right"><a href="{{ reglink }}" class="btn btn-outline-primary">立即注册</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="card-body row">
+                                <div class="col-md-3 text-center">
+                                    <img src="{{ asset('build/images/web-shop.jpg') }}" alt="小程序制作" class="img-thumbnail rounded float-left">
+                                </div>
+                                <div class="col-md-9">
+                                    <h2 class="card-title">{{ city_page.mainWord }}小程序制作</h2>
+                                    <p class="card-text text-indent-2">助派网络为{{ city_page.mainWord }}的中小企业提供优质的小程序制作服务，能够满足{{ city_page.mainWord }}中小企业对标准小程序制作、小程序商城、小程序分销商城等需求。</p>
+                                    <div class="text-right"><a href="{{ reglink }}" class="btn btn-outline-primary">立即注册</a></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            {% block siderbar %}
+                    <div class="col-md-3">
+                        <div class="card mb-3">
+                            <div class="card-header"><i class="iconfont iconjiangzhang- text-info"></i>我们的优势</div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="card-body">
+                                        <div class="text-center"><i class="iconfont iconfree rem-3 text-success"></i></div>
+                                        <h6 class="card-title">做小程序免费开户</h6>
+                                        <p class="card-text">我们承诺对用户不受时间限制、不受企业、不受个人限制永久免费开放小程序注册端口！</p>
+                                    </div>
+                                    <a href="{{ reglink }}" class="btn btn-outline-primary btn-lg btn-block">立即注册</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="card-body">
+                                        <div class="text-center"><i class="iconfont iconshiyong rem-3 text-danger"></i></div>
+                                        <h6 class="card-title">免费试用小程序</h6>
+                                        <p class="card-text">我们承诺对用户从小程序开通之日起免费试用15天，15天内不满意全额退款！</p>
+                                    </div>
+                                    <a href="{{ reglink }}" class="btn btn-outline-primary btn-lg btn-block">立即注册</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="card-body">
+                                        <div class="text-center"><i class="iconfont iconpublic rem-3 text-info"></i></div>
+                                        <h6 class="card-title">小程序制作费用透明</h6>
+                                        <p class="card-text">我们承诺对用户公开所有小程序制作费用，真正做到放心消费无忧享受！</p>
+                                    </div>
+                                    <a href="{{ reglink }}" class="btn btn-outline-primary btn-lg btn-block">立即注册</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="card-body">
+                                        <div class="text-center"><i class="iconfont iconVIP rem-3 text-warning"></i></div>
+                                        <h6 class="card-title">尊享全国最低特惠服务</h6>
+                                        <p class="card-text">尊享全国最低价，自由拖动管理界面，轻松调整界面的小程序仅2888元/年，让您的企业不落伍！</p>
+                                    </div>
+                                    <a href="{{ reglink }}" class="btn btn-outline-primary btn-lg btn-block">立即注册</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-header"><i class="iconfont iconlianxi1 text-info"></i>联系我们</div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <strong class="text-danger">制作咨询</strong>
+                                    <br/><i class="iconfont iconlianxi text-danger"></i>185-7790-6076<br/>
+                                    <i class="iconfont iconshijian text-success"></i>服务时间: 8:00-18:00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

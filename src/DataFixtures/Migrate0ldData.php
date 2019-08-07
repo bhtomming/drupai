@@ -25,7 +25,7 @@ class Migrate0ldData extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
-        $host = $this->container->getParameter('host');
+        /*$host = $this->container->getParameter('host');
         $dbuser = $this->container->getParameter('user');
         $pass = $this->container->getParameter('pass');
         $dbname = $this->container->getParameter('dbname');
@@ -69,7 +69,7 @@ class Migrate0ldData extends Fixture
 
             $manager->persist($article);
         }
-        $manager->flush();
+        $manager->flush();*/
     }
 
 

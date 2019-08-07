@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends Controller
 {
     /**
-     * @Route("/", name="category_index", methods="GET", options={"sitemap":true})
+     * @Route("/", name="category_index", methods="GET")
      * @Route("/{slug}", name="category_show", methods="GET")
      */
     public function index(Category $category,Request $request): Response

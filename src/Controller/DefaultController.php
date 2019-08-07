@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\CityPage;
 use App\Repository\ArticleRepository;
 
 
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -82,28 +84,33 @@ class DefaultController extends Controller
         return $this->render('solution/index.html.twig');
     }
 
+
     /**
-     * @Route("/test/", name="test")
+     *  @Route("/{slug}", name="city_page_show", methods="GET",defaults={"_format"="html"})
+     *
      */
-    public function testCrawlar(){
-        $client = new Client();
-        $source = $client->request('GET','http://shop.drupai.com/sitetemplate.html');
-        dump($source);
-        //$crawler = new Crawler($source);
-        //获取模板链接
-        $templatesLink = $source->selectLink('预览');
-        //模板链接数组
-        $tempLinks = array();
-        $links = $templatesLink->links();
-
-        foreach ($links as $link){
-            $tplink = $link->getUri();
-            $tempLinks[] = $tplink;
-            $this->saveFile($tplink);
+    public function cityPage(CityPage $cityPage)
+    {
+        $template = "";
+        switch ($cityPage->getType())
+        {
+            case 1:
+                $template = "city_app.html.twig";
+                break;
+            case 2:
+                $template = "category.html.twig";
+                break;
+            case 3:
+                $template = "city_category.html.twig";
+                break;
+            default:
+                $template = "city_web.html.twig";
+                break;
         }
+        return $this->render('citypage/'.$template, [
+            'city_page' => $cityPage,
+        ]);
 
-        dump($tempLinks);
-        exit;
     }
 
     //保存文件,可以保存网络文件及本地文件

@@ -5,7 +5,7 @@ ul,li,a,img,p{
     text-decoration: none;
 }
 body {
-    background-color: lightgray;
+    background-color: #f5f8fa!important;
 }
 .card-icon{
     font-size: 78px;
@@ -71,6 +71,9 @@ a:hover{
     font-size: 18px;
 }
 /*********首页模板块*****************/
+.ifan{
+    font-size: 2rem;
+}
 .nei_c {
     width: 1300px;
     overflow: hidden;
@@ -161,4 +164,32 @@ a:hover{
 }
 .main-l-m li.li-bor-notbot {
     border-bottom: 0;
+}
+
+#page-city-article h1{
+    font-size: 1.5rem;
+}
+#page-city-article h2{
+    font-size: 1.25rem;
+}
+.text-indent-2{
+    text-indent: 2em;
+}
+.rem-1r{
+    font-size: 1.5rem;
+}
+.rem-2{
+    font-size: 2rem;
+}
+.rem-2r{
+    font-size: 2.5rem;
+}
+.rem-3{
+    font-size: 3rem;
+}
+.rem-4{
+    font-size: 4rem;
+}
+.rem-5{
+    font-size: 5rem;
 }

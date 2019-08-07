@@ -10,6 +10,7 @@ namespace App\EventListener;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\CityPage;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -56,6 +57,10 @@ class SitemapSubscriber implements EventSubscriberInterface
     {
         $this->registerBlogPostsUrls($event->getUrlContainer());
         $this->registerCategoryUrls($event->getUrlContainer());
+        $this->registerCityPageUrls($event->getUrlContainer());
+        $this->registerCityAppUrls($event->getUrlContainer());
+        $this->registerCityCategoryUrls($event->getUrlContainer());
+        $this->registerCityCategoryWebUrls($event->getUrlContainer());
     }
 
     /**
@@ -98,5 +103,80 @@ class SitemapSubscriber implements EventSubscriberInterface
                 'category.show'
             );
         }
+    }
+
+    public function registerCityPageUrls(UrlContainerInterface $urls): void
+    {
+        $cityPages = $this->doctrine->getRepository(CityPage::class)->findBy(['type'=>CityPage::WEB]);
+
+        foreach ($cityPages as $city){
+            $urls->addUrl(
+                new UrlConcrete(
+                    $this->urlGenerator->generate(
+                        'city_page_show',
+                        ['slug' => $city->getSlug()],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                ),
+                'city.page.web'
+            );
+        }
+
+    }
+
+    public function registerCityAppUrls(UrlContainerInterface $urls): void
+    {
+        $cityPages = $this->doctrine->getRepository(CityPage::class)->findBy(['type'=>CityPage::APP]);
+
+        foreach ($cityPages as $city){
+            $urls->addUrl(
+                new UrlConcrete(
+                    $this->urlGenerator->generate(
+                        'city_page_show',
+                        ['slug' => $city->getSlug()],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                ),
+                'city.page.app'
+            );
+        }
+    }
+
+    public function registerCityCategoryUrls(UrlContainerInterface $urls): void
+    {
+        $cityPages = $this->doctrine->getRepository(CityPage::class)->findBy(['type'=>CityPage::TAG]);
+
+        foreach ($cityPages as $city){
+            $urls->addUrl(
+                new UrlConcrete(
+                    $this->urlGenerator->generate(
+                        'city_page_show',
+                        ['slug' => $city->getSlug()],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                ),
+                'city.page.tag'
+            );
+        }
+
+    }
+
+    public function registerCityCategoryWebUrls(UrlContainerInterface $urls): void
+    {
+        $cityPages = $this->doctrine->getRepository(CityPage::class)->findBy(['type'=>CityPage::CITY_TAG]);
+
+        foreach ($cityPages as $city){
+            $urls->addUrl(
+                new UrlConcrete(
+                    $this->urlGenerator->generate(
+                        'city_page_show',
+                        ['slug' => $city->getSlug()],
+                        UrlGeneratorInterface::ABSOLUTE_URL
+                    )
+                ),
+                'city.page.tag.web'
+            );
+        }
+
     }
 }
