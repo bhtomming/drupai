@@ -1,7 +1,23 @@
 <div class="case-container bg-secondary">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">首页</a></li>
+            <li class="breadcrumb-item active" aria-current="page">客户案例</li>
+        </ol>
+    </nav>
+
     <div class="container py-5">
         <div class="row text-center">
-            <h2 class="col-12 text-white my-3"><span class="oi oi-briefcase mx-3"></span>客户案例</h2>
+            <div class="card">
+                <img src="#" alt="" class="card-img-top">
+                <div class="card-body">
+                    <h4 class="card-title">标题</h4>
+                    <p class="card-text">内容</p>
+                </div>
+                <div class="card-footer">分类</div>
+            </div>
+
             <div class="col-md-3 col-sm-12 case-wrapper">
                 <a href="#">
                     <img src="{{ asset('/uploader/images/case.jpg') }}" class="img-fluid" alt="">

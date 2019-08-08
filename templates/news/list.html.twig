@@ -4,19 +4,39 @@
 
 {% block body %}
     <div class="container my-5">
-        <ul class="list-group list-group-flush">
-    {% for article in articles %}
-            <li class="list-group-item">
-                <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg }}" width="100" height="100" class="img-thumbnail mr-3 float-left"></a>
-                <h6><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h6>
-                <p><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a></p>
-            </li>
-        {% else %}
-        <li class="list-group-item">目前没有任何内容</li>
-    {% endfor %}
-        </ul>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">首页</a></li>
+                <li class="breadcrumb-item active" aria-current="page">最新动态</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <ul class="list-group  list-group-flush">
+                        {% for article in articles %}
+                            <li class="list-group-item">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg }}"  class="img-thumbnail mr-3" alt="{{ article.title }}"></a>
+                                        <div class="media-body">
+                                            <h5 class="mt-0"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h5>
+                                            <a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">目前没有任何内容</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
         {% if articles.haveToPaginate is defined %}
-            <div class="navigation my-3 center-block">
+            <div class="navigation my-3 text-center">
                 {{ pagerfanta(articles, 'twitter_bootstrap4_translated', {routeName: 'news_index_paginated'}) }}
             </div>
         {% endif %}

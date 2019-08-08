@@ -2,12 +2,24 @@
 {% block title %}客户案例_{{ parent() }}{% endblock %}
 {% block body %}
     <div class="container my-5">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">首页</a></li>
+                <li class="breadcrumb-item active" aria-current="page">客户案例</li>
+            </ol>
+        </nav>
+
         <div class="row">
             {% for article in articles %}
-            <div class="col-md-6 my-3">
-                <img class="rounded float-left mr-3" src="{{ article.titleImg }}" alt="">
-                <h4><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.title }}</a></h4>
-                <p><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.summary }}</a></p>
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <img class="card-img-top" src="{{ article.titleImg }}" alt="{{ article.title }}">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.title }}</a></h4>
+                        <p class="card-text"><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.summary }}</a></p>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>

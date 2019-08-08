@@ -86,7 +86,7 @@ class DefaultController extends Controller
 
 
     /**
-     *  @Route("/{slug}", name="city_page_show", methods="GET",defaults={"_format"="html"})
+     *  @Route("city/{slug}", name="city_page_show", methods="GET",defaults={"_format"="html"})
      *
      */
     public function cityPage(CityPage $cityPage)

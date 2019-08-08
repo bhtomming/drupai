@@ -4,15 +4,28 @@
 {% block title %}{{ article.title }}_{{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="container" id="page-article">
-        <div class="row my-md-5">
+    <div class="container my-3" id="page-article">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">首页</a></li>
+                <li class="breadcrumb-item"><a href="{{ article.category.slug }}">{{ article.category.title }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ article.title }}</li>
+            </ol>
+        </nav>
+
+        <div class="row my-3">
             <div class="col-md-9">
-                <h1 class="text-center">{{ article.title }}</h1>
-                <blockquote class="blockquote">
-                    <p>{{ article.summary }}</p>
-                    <footer class="blockquote-footer text-right">作者:{{ article.author }}</footer>
-                </blockquote>
-                <p class="py-md-3">{{ article.content |raw }}</p>
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center">{{ article.title }}</h2>
+                        <blockquote class="blockquote">
+                            <footer class="blockquote-footer text-center">作者:{{ article.author }}</footer>
+                        </blockquote>
+                        <p class="py-md-3">{{ article.content |raw }}</p>
+                    </div>
+                </div>
+
             </div>
             {% block siderbar %}
                 {% if article.category %}

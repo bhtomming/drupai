@@ -28,10 +28,10 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">首页</a></li>
                 {% if  faparent is defined %}
-                    <li class="breadcrumb-item"><a href="{{ faparent.slug }}">{{ faparent.mainWord }}{{ type }}</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path("city_page_show",{slug: faparent.slug}) }}">{{ faparent.mainWord }}{{ type }}</a></li>
                 {% endif %}
                 {% if parent is defined %}
-                <li class="breadcrumb-item"><a href="{{ parent.slug }}">{{ parent.mainWord }}{{ type }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ path("city_page_show",{slug: parent.slug}) }}">{{ parent.mainWord }}{{ type }}</a></li>
                 {% endif %}
                 <li class="breadcrumb-item active" aria-current="page">{{ city_page.mainWord }}{{ type }}</li>
             </ol>
@@ -45,11 +45,11 @@
                         <div class="row">
                             {% for same_area in sub_links %}
                                 <div class="col-md-2 col-4">
-                                    <a  href="{{ same_area.slug }}">{{ same_area.mainWord }}</a>
+                                    <a  href="{{ path("city_page_show",{slug: same_area.slug}) }}">{{ same_area.mainWord }}</a>
                                 </div>
                             {% else %}
                                 {% for same_city in parent.subLinks %}
-                                    <div class="col-md-2 col-4"><a  href="{{ same_city.slug }}">{{ same_city.mainWord }}</a></div>
+                                    <div class="col-md-2 col-4"><a  href="{{ path("city_page_show",{slug: same_city.slug}) }}">{{ same_city.mainWord }}</a></div>
                                 {% else %}
                                 {% endfor %}
                             {% endfor %}

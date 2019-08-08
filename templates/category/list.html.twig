@@ -7,6 +7,14 @@
 {% endif %}
 {% block body %}
     <div class="container my-5">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">首页</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ category.title }}</li>
+            </ol>
+        </nav>
+
         <ul class="list-group list-group-flush">
     {% for article in articles %}
             <li class="list-group-item">
