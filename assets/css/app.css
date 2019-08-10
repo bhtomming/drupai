@@ -7,6 +7,10 @@ ul,li,a,img,p{
 body {
     background-color: #f5f8fa!important;
 }
+#swiper-container-hd img{
+    width: 100%;
+    height: auto;
+}
 .card-icon{
     font-size: 78px;
     color: #007bff;
@@ -75,32 +79,27 @@ a:hover{
     font-size: 2rem;
 }
 .nei_c {
-    width: 1300px;
-    overflow: hidden;
     margin: 0 auto;
     padding-bottom: 90px;
 }
-.nei_c li {
-    width: 252px;
+.nei_c .col-md-3 {
     height: 200px;
-    background: url(../images/main_4.png) no-repeat;
-    float: left;
-    margin: 0 36px 90px;
+    background: url(../images/main_4.png) center no-repeat;
     position: relative;
-    display: inline;
 }
-.nei_c li a {
+.nei_c .col-md-3 a {
     display: block;
     width: 100%;
     height: 100%;
     opacity: 0.6;
+    text-align: center;
     filter: alpha(opacity:60);
 }
-.nei_c li img {
+.nei_c .col-md-3 img {
     width: 250px;
     height: 188px;
 }
-.nei_c li .xsj {
+.nei_c .col-md-3 .xsj {
     width: 88px;
     height: 177px;
     background: url(../images/main_8.png) no-repeat;
@@ -108,63 +107,60 @@ a:hover{
     right: 10px;
     bottom: -16px;
 }
-.nei_c li .xsj img {
+.nei_c .col-md-3 .xsj img {
     width: 80px;
     height: 142px;
     margin: 11px 0 0 4px;
 }
-.nei_c li p{
+.nei_c .col-md-3 p{
     -ms-text-align-last: left;
     text-align-last: left;
     font-size: 14px;
     color: #fff;
 }
-.nei_c li a:hover {
+.nei_c .col-md-3 a:hover {
     opacity: 1;
     filter: alpha(opacity:100);
 }
 /*********************************************/
-.main-l-m .w-1300 {
-    width: 1254px;
-}
 
-.main-l-m li {
-    text-align: center;
-    display: list-item;
-    width: 160px;
-    height: 102px;
-    float: left;
-    padding: 35px 45px;
+
+
+#integer .col,#integer .col-md{
+    height: 173px;
     border: 1px solid #dadada;
     border-top: none;
     border-left: none;
     position: relative;
     box-sizing: unset;
     overflow: hidden;
+    text-align: center;
 }
-.main-l-m li img {
-    margin-top: 20px;
+#integer .iconfont{
+    line-height: 173px;
 }
-.w-1300 ul li p {
+#integer .col p,#integer .col-md p {
     position: absolute;
-    width: 251px;
+    width: 100%;
     height: 173px;
     left: 0;
     top: 173px;
     background: #1EB5AC;
     color: #fff;
-    padding: 0 59px;
+    padding: 0 50px;
 }
-.w-1300 ul li:hover p{
+#integer .col:hover p,#integer .col-md:hover p{
     transition-duration: 1s;
     transform: translateY(-173px);
 }
-.main-l-m li.li-bor-notrig {
+#integer .li-bor-notrig {
     border-right: 0;
 }
-.main-l-m li.li-bor-notbot {
+#integer .li-bor-notbot {
     border-bottom: 0;
 }
+
+/**********************************/
 
 #page-city-article h1{
     font-size: 1.5rem;
