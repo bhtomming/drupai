@@ -28,9 +28,9 @@ class LogSubscriber implements EventSubscriberInterface
         $currentUrl = $server->get('REQUEST_URI');
         $token = $this->container->get('security.token_storage')->getToken();
         $ip = $request->getClientIp();
-        /*if($ip == "127.0.0.1"){
+        if($ip == "127.0.0.1"){
             return;
-        }*/
+        }
         if(!is_null($token) && !preg_match('/\/userlog\//',$currentUrl) && $request->get('filter') === null){
             $em = $this->container->get('doctrine.orm.entity_manager');
             $userLog = new UserLog();
