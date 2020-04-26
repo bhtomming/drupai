@@ -13,7 +13,7 @@ namespace App\DataFixtures;
 use App\Entity\CityPage;
 use App\Services\PinYin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use function PHPSTORM_META\type;
 use Symfony\Component\Finder\Finder;

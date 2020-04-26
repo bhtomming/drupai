@@ -23,16 +23,13 @@ class Category extends PageMeta
      */
     private $title;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
-     */
-    private $articles;
+
 
 
     public function __construct()
     {
         parent::__construct();
-        $this->articles = new ArrayCollection();
+    //    $this->articles = new ArrayCollection();
     }
 
     public function getId()
@@ -58,7 +55,7 @@ class Category extends PageMeta
         return $this->title ? $this->title : 'Category';
     }
 
-    public function addArticle(Article $article)
+   /* public function addArticle(AbstractArticle $article)
     {
         if(!$this->articles->contains($article)){
             $this->articles->add($article);
@@ -66,7 +63,7 @@ class Category extends PageMeta
         return $this;
     }
 
-    public function removeArticle(Article $article)
+    public function removeArticle(AbstractArticle $article)
     {
         if($this->articles->contains($article)){
             $this->articles->remove($article);
@@ -77,7 +74,7 @@ class Category extends PageMeta
     public function getArticles()
     {
         return $this->articles;
-    }
+    }*/
 
 
 }

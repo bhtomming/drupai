@@ -10,18 +10,23 @@
             </ol>
         </nav>
 
-        <div class="row">
+        <div class="row row-cols-1 row-cols-md-3">
             {% for article in articles %}
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <img class="card-img-top" src="{{ article.titleImg }}" alt="{{ article.title }}">
-                    <div class="card-body">
-                        <h4 class="card-title"><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.title }}</a></h4>
-                        <p class="card-text"><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.summary }}</a></p>
+                <div class="col col-md-4 mb-3">
+                    <div class="card  h-100">
+                        <img class="card-img-top" src="{{ article.titleImg ? : default_image | imagine_filter('left_thumb') }}" alt="{{ article.title }}">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.title }}</a></h4>
+                            <p class="card-text"><a href="{{ path('article_show',{'slug' : article.slug}) }}">{{ article.summary }}</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
+        {% if articles.haveToPaginate is defined %}
+            <div class="navigation my-3 center-block">
+                {{ pagerfanta(articles, 'twitter_bootstrap4_translated') }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

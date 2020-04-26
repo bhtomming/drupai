@@ -49,7 +49,7 @@
                                 </div>
                             {% else %}
                                 {% for same_city in parent.subLinks %}
-                                    <div class="col-md-2 col-4"><a  href="{{ path("city_page_show",{slug: same_city.slug}) }}">{{ same_city.mainWord }}</a></div>
+                                    <div class="col-md-2 col-4"><a  href="{{ path("city_page_show",{slug: same_city.slug}) }}">{{ same_city.mainWord }}{{ type }}</a></div>
                                 {% else %}
                                 {% endfor %}
                             {% endfor %}

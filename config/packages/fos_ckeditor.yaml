@@ -3,3 +3,12 @@
 twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+fos_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserImageUploadRoute: image_upload
+            filebrowserImageBrowseRoute: image_browser
+            allowedContent: true
+            shiftEnterMode: 'CKEDITOR.ENTER_P'

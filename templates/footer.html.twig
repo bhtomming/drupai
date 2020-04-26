@@ -4,21 +4,25 @@
            <div class="col-md-3">
                <h6>联系我们</h6>
                <ul class="list-group list-group-flush">
-                   <li class="list-group-item bg-dark">公司：北海助派网络信息有限公司</li>
-                   <li class="list-group-item bg-dark">地址：北海市海城区西藏路</li>
-                   <li class="list-group-item bg-dark">联系人：唐经理</li>
-                   <li class="list-group-item bg-dark">电话: <a href="tel:18577906076">185-7790-6076</a></li>
-                   <li class="list-group-item bg-dark">邮箱：<a href="mailto:233238526@qq.com">233238526@qq.com</a></li>
+                   <li class="list-group-item bg-dark">{{ site.siteName }}</li>
+                   <li class="list-group-item bg-dark">地址：{{ site.address }}</li>
+                   <li class="list-group-item bg-dark">电话: <a href="tel:{{ site.phone }}">{{ site.phone }}</a></li>
+                   <li class="list-group-item bg-dark">邮箱：<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
                </ul>
            </div>
            <div class="col-md-3">
                <h6>相关链接</h6>
                <ul class="list-group list-group-flush">
-                   <li class="list-group-item bg-dark"><a href="{{ path('product_list') }}">产品中心</a></li>
-                   <li class="list-group-item bg-dark"><a href="{{ path('case_list') }}">客户案例</a></li>
-                   <li class="list-group-item bg-dark"><a href="{{ path('news_list') }}">最新动态</a></li>
-                   <li class="list-group-item bg-dark"><a href="{{ path('about') }}">关于我们</a></li>
-                   <li class="list-group-item bg-dark"><a href="{{ path('article_show',{slug:'lian-xi-wo-men.html'}) }}">联系我们</a></li>
+                   {% for link in releLinks()|slice(0,6) %}
+                       <li class="list-group-item bg-dark">
+                           <a href="{{ link.url }}" >
+                               {{ link.name }}
+                           </a>
+                       </li>
+                   {% else %}
+                       <li class="how-bor1 p-rl-5 p-tb-10">没有链接</li>
+                   {% endfor %}
+
                </ul>
            </div>
 
@@ -34,14 +38,23 @@
            <div class="col-md-3">
                <h6>友情链接</h6>
                <ul class="list-group list-group-flush">
-                   <li class="list-group-item bg-dark"><a href="http://www.drupalla.com/" target="_blank">猪跑啦</a></li>
+                   {% for link in friendLinks()|slice(0,6) %}
+                       <li class="list-group-item bg-dark">
+                           <a href="{{ link.url }}" target="_blank">
+                               {{ link.name }}
+                           </a>
+                       </li>
+                   {% else %}
+                       <li class="how-bor1 p-rl-5 p-tb-10">没有链接</li>
+                   {% endfor %}
                </ul>
            </div>
        </div>
        <div class="row text-center">
            <div class="col-12 my-3">
-               <p>CopyRight&copy;2016-2019&nbsp;北海助派网络信息有限公司</p>
-               <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">桂ICP备16001430号</a>
+               <p><a href="{{ path('sitemap_html') }}">网站导航</a>|<a href="/sitemap.xml">网站地图</a></p>
+               <p>CopyRight&copy;{{ site.copyRight }}</p>
+               <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">{{ site.beian }}</a>
            </div>
        </div>
    </div>

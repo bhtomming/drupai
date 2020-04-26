@@ -2,32 +2,43 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\View\DefaultView;
+use Pagerfanta\View\OptionableView;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/category")
  */
-class CategoryController extends Controller
+class CategoryController extends AbstractController
 {
     /**
-     * @Route("/", name="category_index", methods="GET")
-     * @Route("/{slug}", name="category_show", methods="GET")
+     * @Route("/", name="category_index", methods="GET",defaults={"page": "1", "_format"="html"})
+     * @Route("/{slug}", name="category_show", methods="GET",defaults={"page": "1", "_format"="html"})
+     *
      */
-    public function index(Category $category,Request $request): Response
+    public function index(Category $category,Request $request,ArticleRepository $articleRepository): Response
     {
+        $page = $request->query->get('page') ? : 1;
         $session = $request->getSession();
         $path = $request->getPathInfo();
         $this->isRead($session,$path,$category);
+        $articles = $articleRepository->findByCategory($category->getId());
+        $articles = $articleRepository->createPaginatorForArray($articles,$page);
 
-        $articles = $category->getArticles();
+
         return $this->render('category/list.html.twig', [
             'articles' => $articles,
             'category' => $category,

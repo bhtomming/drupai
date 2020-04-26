@@ -23,12 +23,12 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">首页</a></li>
                 {% if  faparent is defined %}
-                    <li class="breadcrumb-item"><a href="{{ path("city_page_show",{slug: faparent.slug}) }}">{{ faparent.mainWord }}小程序制作</a></li>
+                    <li class="breadcrumb-item"><a href="{{ path("city_page_show",{slug: faparent.slug}) }}">{{ faparent.mainWord }}小程序开发</a></li>
                 {% endif %}
                 {% if parent is defined %}
-                <li class="breadcrumb-item"><a href="{{ path("city_page_show",{slug: parent.slug}) }}">{{ parent.mainWord }}小程序制作</a></li>
+                <li class="breadcrumb-item"><a href="{{ path("city_page_show",{slug: parent.slug}) }}">{{ parent.mainWord }}小程序开发</a></li>
                 {% endif %}
-                <li class="breadcrumb-item active" aria-current="page">{{ city_page.mainWord }}小程序制作</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ city_page.mainWord }}小程序开发</li>
             </ol>
         </nav>
 
@@ -44,7 +44,7 @@
                                 </div>
                             {% else %}
                                 {% for same_city in parent.subLinks %}
-                                    <div class="col-md-2 col-4"><a  href="{{ path("city_page_show",{slug: same_city.slug}) }}">{{ same_city.mainWord }}</a></div>
+                                    <div class="col-md-2 col-4"><a  href="{{ path("city_page_show",{slug: same_city.slug}) }}">{{ same_city.mainWord }}小程序开发</a></div>
                                 {% else %}
                                 {% endfor %}
                             {% endfor %}
@@ -59,9 +59,9 @@
             <div class="col-md-9">
 
                 <div class="card mb-3">
-                    <h1 class="card-header">助派网络营销推广助手-{{ city_page.mainWord }}小程序制作说明：</h1>
+                    <h1 class="card-header">助派网络营销推广助手-{{ city_page.mainWord }}小程序开发说明：</h1>
                     <div class="card-body">
-                        <p class="py-md-3 text-indent-2">助派网络营销推广助手基于领先的多合一智能建站系统，以专业的在线服务精神，致力于向客户提供优质的网站建设，微信公众号开发，小程序制作为核心的服务和企业网站运营、推广解决方案，为{{ city_page.mainWord }}企业网站建设，微信公众号开发，小程序制作创造长期的价值和挖掘潜在的增长。</p>
+                        <p class="py-md-3 text-indent-2">助派网络营销推广助手基于领先的多合一智能建站系统，以专业的在线服务精神，致力于向客户提供优质的网站建设，微信公众号开发，小程序制作为核心的服务和企业网站运营、推广解决方案，为{{ city_page.mainWord }}企业网站建设，微信公众号开发，小程序开发创造长期的价值和挖掘潜在的增长。</p>
                         <blockquote class="blockquote">
                             <footer class="blockquote-footer text-right">{{ city_page.createdAt | date("Y年m月d日") }}</footer>
                         </blockquote>
@@ -79,8 +79,8 @@
                                     <img src="{{ asset('build/images/web-pc.jpg') }}" alt="标准小程序制作" class="img-thumbnail rounded">
                                 </div>
                                 <div class="col-md-9">
-                                    <h2 class="card-title">{{ city_page.mainWord }}企业标准小程序制作</h2>
-                                    <p class="card-text text-indent-2">标准小程序制作是为{{ city_page.mainWord }}的中小企型业提供标准化的小程序制作，主要功能包括展示公司简介、产品、品牌信息发布等，满足{{ city_page.mainWord }}企业对小程序所需的展示功能。</p>
+                                    <h2 class="card-title">{{ city_page.mainWord }}企业标准小程序开发</h2>
+                                    <p class="card-text text-indent-2">标准小程序开发是为{{ city_page.mainWord }}的中小企型业提供标准化的小程序制作，主要功能包括展示公司简介、产品、品牌信息发布等，满足{{ city_page.mainWord }}企业对小程序所需的展示功能。</p>
                                     <div class="text-right"><a href="{{ reglink }}" class="btn btn-outline-primary">立即注册</a></div>
                                 </div>
                             </div>

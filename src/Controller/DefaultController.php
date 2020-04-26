@@ -3,18 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\CityPage;
 use App\Repository\ArticleRepository;
 
 
 use Goutte\Client;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+
+class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="home",options={"sitemap":true})
@@ -47,10 +51,23 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/case/", name="case_list", options={"sitemap":true})
+     * @Route("/case/", name="case_list", options={"sitemap":true},defaults={"page": "1", "_format"="html"})
+     *
      */
-    public function cases(ArticleRepository $repository){
-        $articles = $repository->findByCategory(26);
+    public function cases(ArticleRepository $articleRepository,Request $request){
+        $page = $request->query->get('page') ? : 1;
+        $em = $this->getDoctrine()->getManager();
+        $articles = [];
+        $categories = $em->getRepository(Category::class)->findAllTitleLike('案例');
+
+        if ($categories != null)
+        {
+            foreach ($categories as $category){
+                $articles = array_filter(array_merge($articles,$articleRepository->findByCategory($category->getId())));
+            }
+        }
+        $articles = $articleRepository->createPaginatorForArray($articles,$page,9);
+
         return $this->render('case/list.html.twig',['articles'=>$articles]);
     }
 
@@ -59,7 +76,11 @@ class DefaultController extends Controller
      * @Route("/news/pages/{page}",defaults={"_format"="html"}, requirements={"page": "[1-9]\d*"}, name="news_index_paginated")
      */
     public function news(ArticleRepository $articleRepository,int $page){
-        $articles = $articleRepository->findLatest($page);
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository(Category::class)->findOneBy(['title'=>'最新动态']);
+        $articles = $articleRepository->findBy(['category'=>$category],['updatedAt'=>'ASC']);
+        $articles = $articleRepository->createPaginatorForArray($articles,$page);
+
         return $this->render('news/list.html.twig',['articles'=>$articles]);
     }
 
@@ -113,19 +134,29 @@ class DefaultController extends Controller
 
     }
 
+    /**
+     *  @Route("sitemap.html", name="sitemap_html", methods="GET",defaults={"_format"="html"})
+     */
+    public function siteMapHtml()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cityApps = $em->getRepository(CityPage::class)->findBy(['type'=>CityPage::APP]);
+        $cityWebs = $em->getRepository(CityPage::class)->findBy(['type'=>CityPage::WEB]);
+        $articles = $em->getRepository(Article::class)->findAll();
+        return $this->render('default/site_map.html.twig',[
+            'city_apps'=>$cityApps,
+            'city_webs'=>$cityWebs,
+            'articles'=>$articles,
+        ]);
+    }
+
     //保存文件,可以保存网络文件及本地文件
     public function saveFile($dom,$fileName){
         $fileControl = new Filesystem();
         $fileControl->copy($dom,$fileName);
     }
 
-    //分析链接
-    public function analysisLink($url){
-        //绝对链接
-        if(stripos($url,'http') || stripos($url,'https')){
 
-        }
-    }
 }
 
 

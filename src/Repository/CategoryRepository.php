@@ -6,9 +6,10 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\Persistence\ManagerRegistry;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,9 +19,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
+    }
+
+    public function findAllTitleLike($title)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->where('c.title like :a')
+            ->setParameter('a','%'.$title.'%')
+            ->getQuery()
+            ->getResult();
+        ;
+        return $query;
     }
 
 //    /**

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}图片管理{% endblock %}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1332196_epx9lt9r91l.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
+    <script src="{{ asset('build/js/jquery-3.3.1.min.js') }}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <button class="btn btn-outline-warning mr-3" id="modify" data-toggle="modal" data-target="#modifyModal" data-action="{{ path('file_flash_upload') }}" >修改名称</button>
+        <button class="btn btn-outline-danger mr-3" id="del" data-action="{{ path('file_flash_upload') }}">删除图片</button>
+        <button type="button" class="btn btn-outline-primary" id="sure" >确定选择</button>
+    </div>
+    <ul class="row">
+        {% for image in images %}
+            <li class="col my-5"><img src="{{ image.url }}" class="img-responsive" alt="{{ image.name }}" title="{{ image.name }}" width="120" height="120" ></li>
+        {% endfor %}
+    </ul>
+    {% if images.haveToPaginate is defined %}
+        <div class="navigation my-3 center-block">
+            {{ pagerfanta(images, 'twitter_bootstrap4_translated') }}
+        </div>
+    {% endif %}
+    <div id="modifyModal" class="modal fade" tabindex="-1" aria-hidden="true" aria-labelledby="modifyModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modifyModalLabel">修改</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="label" for="name-input">名称</label>
+                            <input type="text" class="form-control" name="name-input" id="name-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="{{ asset('build/js/img-browser.js') }}"></script>
+    {#<script src="{{ asset('build/js/bootstrap.min.js') }}"></script>#}
+{% endblock %}
+</body>
+</html>

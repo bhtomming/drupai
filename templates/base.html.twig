@@ -1,11 +1,19 @@
+{% set site = site() %}
+{% set default_image = "/build/images/default.jpg" %}
 <!DOCTYPE html>
 <html lang="zh_CN">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{% block title %}助派网络信息技术【官网】{% endblock %}</title>
-        <meta name="keywords" content="{% block keywords %}北海网站制作,小程序制作,营销推广助手{% endblock %}">
-        <meta name="description" content="{% block description %}北海助派网络信息技术有限公司是一家有实力的网站制作、小程序制作、微信公众号制作、微信营销推广公司，助派网络为无数客户成功进行营销推广活动。{% endblock %}">
+        <title>{% block title %}{{ site.siteName }}{% endblock %}</title>
+        <meta name="keywords" content="{% block keywords %}{{ site.keywords }}{% endblock %}">
+        <meta name="description" content="{% block description %}{{ site.description }}{% endblock %}">
+        {% block meta %}
+            {% for meta in getMeta() %}
+                {{ meta.codes|raw }}
+            {% else %}
+            {% endfor %}
+        {% endblock %}
         {% block stylesheets %}
             <link rel="stylesheet" href="//at.alicdn.com/t/font_1332196_epx9lt9r91l.css">
             <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -16,28 +24,23 @@
     {{ include('navbar.html.twig') }}
         {% block body %}
             {% block sidebar %}
+                {{ region('sidebar') }}
             {% endblock %}
         {% endblock %}
     {{ include('footer.html.twig') }}
         {% block javascripts %}
             <script src="{{ asset('build/js/jquery-1.9.1.min.js') }}"></script>
-            <script src="{{ asset('build/js/bootstrap.min.js') }}"></script>
-            <!--百度自动推送代码-->
-            <script>
-                (function(){
-                    var bp = document.createElement('script');
-                    var curProtocol = window.location.protocol.split(':')[0];
-                    if (curProtocol === 'https'){
-                        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                    }
-                    else{
-                        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                    }
-                    var s = document.getElementsByTagName("script")[0];
-                    s.parentNode.insertBefore(bp, s);
-                })();
-            </script>
-            <!--百度自动推送代码-->
+
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            {#<script src="{{ asset('build/js/bootstrap.min.js') }}"></script>#}
         {% endblock %}
+    {% block otherScript %}
+        {% for script in getScripts() %}
+            {{ script.codes|raw }}
+        {% else %}
+        {% endfor %}
+    {% endblock %}
     </body>
 </html>

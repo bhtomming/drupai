@@ -41,6 +41,12 @@ class ArticleAdmin extends AbstractAdmin
             ->add('category.title')
             ->add('summary')
             ->add('readNum')
+            ->add('createdAt',null,[
+                'label'=>'创建时间',
+                'format'=>'Y年m月d日 H:i:s',
+                'timezone' => 'Asia/Shanghai',
+                'sortable'=>true,
+            ])
             ->add('updatedAt',null,[
                 'label'=>'修改时间',
                 'format'=>'Y年m月d日 H:i:s',
@@ -65,11 +71,19 @@ class ArticleAdmin extends AbstractAdmin
                 'choice_label' => 'title',
             ])
             ->add('content',CKEditorType::class,array(
-                'config' => array(
-                    'uiColor' => '#e4e1f9'
-                )
+                'config' => []
             ))
         ;
+    }
+
+    public function configureBatchActions($actions)
+    {
+        $actions['publish'] =[
+            'ask_confirmation' => true,
+            'label'=>'发布文章',
+        ];
+
+        return $actions;
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter)

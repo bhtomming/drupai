@@ -5,7 +5,9 @@ namespace App\EventSubscriber;
 use App\Entity\UserLog;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
+
 
 class LogSubscriber implements EventSubscriberInterface
 {
@@ -15,8 +17,9 @@ class LogSubscriber implements EventSubscriberInterface
         $this->container = $container;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
+
         $request = $event->getRequest();
         $currentUrl = $request->server->get('REQUEST_URI');
         $token = $this->container->get('security.token_storage')->getToken();
@@ -44,8 +47,6 @@ class LogSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return [
-           'kernel.request' => 'onKernelRequest',
-        ];
+        return [KernelEvents::RESPONSE=>'onKernelResponse'];
     }
 }

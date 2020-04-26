@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\CityPage;
 use App\Services\PinYin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Finder\Finder;
 
@@ -32,9 +32,9 @@ class CityCategoryFixture extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        $this->cityData = json_decode(file_get_contents(__DIR__.'/../Resources/data/city/citylist.json'));
+        /*$this->cityData = json_decode(file_get_contents(__DIR__.'/../Resources/data/city/citylist.json'));
         $this->classData = json_decode(file_get_contents(__DIR__.'/../Resources/data/category.json'));
-        $this->initCityData($manager);
+        $this->initCityData($manager);*/
     }
 
     public function initCityData(ObjectManager $manager){

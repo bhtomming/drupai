@@ -15,7 +15,7 @@ services:
         class: App\Admin\CategoryAdmin
         arguments: [~, App\Entity\Category, ~]
         tags:
-          - { name: sonata.admin, manager_type: orm, label: 分类管理 }
+          - { name: sonata.admin, manager_type: orm, label: '分类管理' }
 
     sonata.admin.article:
         class: App\Admin\ArticleAdmin
@@ -26,9 +26,58 @@ services:
             - App\Entity\Article
             - App\Admin\ArticleAdminController
 
+    sonata.admin.comb_article:
+        class: App\Admin\CombArticleAdmin
+        arguments: [~, App\Entity\CombArticle ,App\Admin\CombAdminController]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '组合内容' }
+ #           - App\Admin\ArticleAdminController
+
     sonata.admin.visit:
         class: App\Admin\VisitLogAdmin
         arguments: [~, App\Entity\UserLog, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: '来访记录' }
 
+
+    sonata.admin.friendlink:
+        class: App\Admin\FriendLinkAdmin
+        arguments: [~, App\Entity\FriendLink, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '友情链接' }
+
+    sonata.admin.relelink:
+        class: App\Admin\ReleLinkAdmin
+        arguments: [~, App\Entity\ReleLink, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '相关链接' }
+
+    admin.settings:
+        class: App\Admin\SettingsAdmin
+        arguments: [~, App\Entity\Settings ,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '网站设置' }
+
+    admin.meta:
+        class: App\Admin\MetaAdmin
+        arguments: [~, App\Entity\Meta ,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '验证管理' }
+
+    admin.script:
+        class: App\Admin\ScriptAdmin
+        arguments: [~, App\Entity\Scripts ,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '第三方代码' }
+
+    admin.region:
+        class: App\Admin\RegionAdmin
+        arguments: [~, App\Entity\Region ,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '区域管理' }
+
+    admin.block:
+        class: App\Admin\BlockAdmin
+        arguments: [~, App\Entity\Block ,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '区块管理' }

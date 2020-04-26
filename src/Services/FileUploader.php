@@ -8,12 +8,13 @@
 
 namespace App\Services;
 
-
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
+
     private $targetDirectory;
 
     public function __construct($targetDirectory)
@@ -28,10 +29,25 @@ class FileUploader
         try {
             $file->move($this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {
-            // ... handle exception if something happens during file upload
+            throw new FileException(printf("不能上传文件,错误信息:%s",$e->getMessage()));
         }
 
         return $fileName;
+    }
+
+    public function browser()
+    {
+        $finder = new Finder();
+        $finder->in($this->getTargetDirectory());
+        $finder->name(['*.jpg','*.jpeg','*.png','*.bmp']);
+        $images = [];
+        foreach ($finder as $file)
+        {
+            $image['name'] = $file->getFilename();
+            $image['url'] = '/'.$file->getPath().'/'.$file->getFilename();
+            $images[] = $image;
+        }
+        return $images;
     }
 
     public function getTargetDirectory()

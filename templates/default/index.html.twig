@@ -7,10 +7,22 @@
 {% endblock %}
 
 {% block body %}
-    {{ include('/default/swiper.html.twig') }}
-    {{ include('/default/business.html.twig') }}
-    {{ include('/default/template.html.twig') }}
-    {{ include('/default/integlar.html.twig') }}
+    {% block slider %}
+    {#{{ include('/default/swiper.html.twig') }}#}
+        {{ region('slider') }}
+        {% endblock %}
+    {% block height_light %}
+    {#{{ include('/default/business.html.twig') }}#}
+        {{ region('height_light') }}
+        {% endblock %}
+    {% block seconde_row %}
+    {#{{ include('/default/template.html.twig') }}#}
+        {{ region('seconde_row') }}
+        {% endblock %}
+    {% block third_row %}
+    {#{{ include('/default/integlar.html.twig') }}#}
+        {{ region('third_row') }}
+        {% endblock %}
 {% endblock %}
 
 {% block javascripts %}

@@ -1,0 +1,21 @@
+liip_imagine:
+    cache: default
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.root_dir%/../public"
+                cache_prefix: "media/cache"
+    filter_sets:
+        cache: ~
+        left_thumb:
+            quality: 75%
+            filters:
+                thumbnail: { size: [180, 120], mode: outbound }
+        img_browser:
+            quality: 75%
+            cache: default
+            filters:
+                fixed:
+                    width: 120
+                    height: 120
+                #thumbnail: {size: [120,120], mode: outbound }

@@ -20,7 +20,7 @@
                             <li class="list-group-item">
                                 <div class="card-body">
                                     <div class="media">
-                                        <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg }}"  class="img-thumbnail mr-3" alt="{{ article.title }}"></a>
+                                        <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg ? : default_image | imagine_filter('left_thumb') }}"  class="img-thumbnail mr-3" alt="{{ article.title }}" onerror="this.src='{{ asset(default_image) }}'"></a>
                                         <div class="media-body">
                                             <h5 class="mt-0"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h5>
                                             <a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a>

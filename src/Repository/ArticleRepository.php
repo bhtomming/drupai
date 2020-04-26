@@ -3,11 +3,14 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,7 +20,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Article::class);
     }
@@ -51,7 +54,7 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findLatest(int $page = 1): Pagerfanta
+    /*public function findLatest(int $page = 1): Pagerfanta
     {
         $query = $this->getEntityManager()
             ->createQuery('
@@ -66,9 +69,25 @@ class ArticleRepository extends ServiceEntityRepository
         ;
 
         return $this->createPaginator($query, $page);
+    }*/
+
+    public function findLatest(int $page = 1): Pagerfanta
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT a, u
+                FROM App:Article a
+                JOIN a.author u
+                WHERE a.createdAt <= :now
+                ORDER BY a.createdAt DESC
+            ')
+            ->setParameter('now', new \DateTime())
+        ;
+
+        return $this->createPaginator($query, $page);
     }
 
-    public function createPaginator(Query $query, int $page): Pagerfanta
+    public function createPaginator(Query $query, int $page = 1): Pagerfanta
     {
         $paginator = new Pagerfanta(new DoctrineORMAdapter($query));
         $paginator->setMaxPerPage(Article::NUM_ITEMS);
@@ -77,14 +96,37 @@ class ArticleRepository extends ServiceEntityRepository
         return $paginator;
     }
 
+    public function createPaginatorForArray(array $arr, int $page = 1,int $max = null): Pagerfanta
+    {
+        $paginator = new Pagerfanta(new ArrayAdapter($arr));
+        $paginator->setMaxPerPage($max ? : Article::NUM_ITEMS);
+        $paginator->setCurrentPage($page);
+
+        return $paginator;
+    }
+
+    public function createPaginatorFromORMByCategory(string $id,int $page): Pagerfanta
+    {
+        $query = $this->createQueryBuilder('a')
+            ->join('a.category','g')
+            ->where('g.id=:c')
+            ->setParameter('c',$id)
+            ->orderBy('a.createdAt','DESC')
+            ->getQuery()
+            ;
+        return $this->createPaginator($query,$page);
+    }
+
     public function findByCategory($category)
     {
-        return $this->createQueryBuilder('a')
+        $query = $this->createQueryBuilder('a')
             ->join('a.category','g')
             ->where('g.id=:c')
             ->setParameter('c',$category)
             ->orderBy('a.createdAt','DESC')
             ->getQuery()
             ->getResult();
+
+        return $query;
     }
 }
