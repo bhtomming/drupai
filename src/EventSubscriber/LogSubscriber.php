@@ -21,21 +21,30 @@ class LogSubscriber implements EventSubscriberInterface
     {
 
         $request = $event->getRequest();
-        $currentUrl = $request->server->get('REQUEST_URI');
+        $server = $request->server;
+        $header = $server->getHeaders();
+        $userAgent = $header['USER_AGENT'];
+
+        $currentUrl = $server->get('REQUEST_URI');
         $token = $this->container->get('security.token_storage')->getToken();
         $ip = $request->getClientIp();
-        if($ip == "127.0.0.1"){
+        /*if($ip == "127.0.0.1"){
             return;
-        }
+        }*/
         if(!is_null($token) && !preg_match('/\/userlog\//',$currentUrl) && $request->get('filter') === null){
             $em = $this->container->get('doctrine.orm.entity_manager');
             $userLog = new UserLog();
-            $user = $this->container->get('security.token_storage')->getToken()->getUser();
-            $username = is_string($user) ? '匿名用户' : $user->getUsername();
+            $username = $this->isCrawler($userAgent);
+            if($username == "自然人")
+            {
+                $user = $this->container->get('security.token_storage')->getToken()->getUser();
+                $username = is_string($user) ? '匿名用户' : $user->getUsername();
+            }
             $userLog->setUsername($username);
             $userLog->setCurrentUrl($currentUrl);
             $userLog->setIp($ip);
-            $userLog->setReferrer($request->server->get('HTTP_REFERRER'));
+            $userLog->setUserAgent($userAgent);
+            $userLog->setReferrer($server->get('HTTP_REFERRER'));
             $userLog->setAction($request->getMethod());
             $userLog->setData(json_encode($request->request->all()));
             $userLog->setCreatedAt(new \DateTime('now'));
@@ -49,4 +58,25 @@ class LogSubscriber implements EventSubscriberInterface
     {
         return [KernelEvents::RESPONSE=>'onKernelResponse'];
     }
+
+    function isCrawler($agent) {
+        $agent= strtolower($agent);
+        if (!empty($agent)) {
+            $spiderSite= array(
+                'Googlebot'=>' Google 爬虫', // Google 爬虫
+                'Baiduspider'=>'百度爬虫', // 百度爬虫
+                'Yahoo! Slurp'=>'雅虎爬虫', // 雅虎爬虫
+                'YodaoBot'=>'有道爬虫', // 有道爬虫
+                'msnbot'=>'Bing爬虫'
+            );
+            foreach($spiderSite as $spider => $name) {
+                $spider = strtolower($spider);
+                if (strpos($agent, $spider) !== false) {
+                    return $name;
+                }
+            }
+        }
+        return "自然人";
+    }
+
 }

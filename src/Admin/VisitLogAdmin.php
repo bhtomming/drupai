@@ -24,6 +24,7 @@ class VisitLogAdmin extends AbstractAdmin
     {
         $list->add('username',null,['label'=>'用户'])
             ->add('currentUrl',null,['label'=>'访问'])
+            ->add('userAgent',null,['label'=>'访问标头'])
             ->add('referrer',null,['label'=>'来源'])
             ->add('ip',null,['label'=>'来访IP'])
             ->add('action',null,['label'=>'方式'])

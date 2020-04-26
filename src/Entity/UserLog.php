@@ -56,6 +56,11 @@ class UserLog
      */
     private $ipFrom;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $userAgent;
+
     public function getId()
     {
         return $this->id;
@@ -153,6 +158,18 @@ class UserLog
     public function setIpFrom(?string $ipFrom): self
     {
         $this->ipFrom = $ipFrom;
+
+        return $this;
+    }
+
+    public function getUserAgent(): ?string
+    {
+        return $this->userAgent;
+    }
+
+    public function setUserAgent(?string $userAgent): self
+    {
+        $this->userAgent = $userAgent;
 
         return $this;
     }
