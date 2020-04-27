@@ -15,17 +15,21 @@
             </ol>
         </nav>
 
-        <ul class="list-group list-group-flush">
-    {% for article in articles %}
-            <li class="list-group-item">
-                <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg ? : default_image | imagine_filter('left_thumb') }}"  class="img-thumbnail mr-3 float-left"></a>
-                <h6><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h6>
-                <p><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a></p>
-            </li>
-        {% else %}
-        <li class="list-group-item">目前没有任何内容</li>
-    {% endfor %}
-        </ul>
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-group list-group-flush">
+                    {% for article in articles %}
+                        <li class="list-group-item">
+                            <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg ? : default_image | imagine_filter('left_thumb') }}"  class="img-thumbnail mr-3 float-left"></a>
+                            <h6 class="list-title"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h6>
+                            <p class="list-summary"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a></p>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">目前没有任何内容</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
         {% if articles.haveToPaginate is defined %}
             <div class="navigation my-3 center-block">
                 {{ pagerfanta(articles, 'twitter_bootstrap4_translated') }}

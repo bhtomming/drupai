@@ -22,11 +22,13 @@
     </head>
     <body>
     {{ include('navbar.html.twig') }}
+    <div id="main-body">
         {% block body %}
             {% block sidebar %}
                 {{ region('sidebar') }}
             {% endblock %}
         {% endblock %}
+    </div>
     {{ include('footer.html.twig') }}
         {% block javascripts %}
             <script src="{{ asset('build/js/jquery-1.9.1.min.js') }}"></script>

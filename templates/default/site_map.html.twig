@@ -27,12 +27,12 @@
                         <div class="row">
                             {% for city_web in city_webs %}
                             <div class="col  my-2">
-                                <a href="/city/{{ city_web.slug }}" class="btn btn-lg btn-outline-info" role="button" aria-pressed="true">{{ city_web.mainWord }}网站开发</a>
+                                <a href="/city/{{ city_web.slug }}" class="btn btn-outline-info my-1" role="button" aria-pressed="true">{{ city_web.mainWord }}网站开发</a>
                             </div>
                             {% endfor %}
                             {% for city_app in city_apps %}
                                 <div class="col  my-2">
-                                    <a href="/city/{{ city_app.slug }}" class="btn btn-lg btn-outline-info" role="button" aria-pressed="true">{{ city_app.mainWord }}小程序开发</a>
+                                    <a href="/city/{{ city_app.slug }}" class="btn btn-outline-info my-1" role="button" aria-pressed="true">{{ city_app.mainWord }}小程序开发</a>
                                 </div>
                             {% endfor %}
                         </div>
@@ -44,8 +44,8 @@
                     <div class="container">
                         <div class="row">
                             {% for article in articles %}
-                            <div class="col  my-2">
-                                <a href="/article/{{ article.slug }}" class="btn btn-lg btn-outline-info" role="button" aria-pressed="true">{{ article.title }}</a>
+                            <div class="col  my-1">
+                                <a href="/article/{{ article.slug }}" class="btn btn-outline-info my-1" role="button" aria-pressed="true">{{ article.title }}</a>
                             </div>
                             {% endfor %}
                         </div>
@@ -56,14 +56,14 @@
                 <div class="card">
                     <div class="card-header">主页</div>
                     <div class="card-body">
-                        <a href="{{ path('home') }}" class="btn btn-lg btn-outline-info" role="button" aria-pressed="true">网站制作</a>
+                        <a href="{{ path('home') }}" class="btn btn-outline-info my-1" role="button" aria-pressed="true">网站制作</a>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">新闻动态</div>
                     <div class="card-body">
                         {% for article_new in articles|from_cate('动态') %}
-                        <a href="{{ path('home') }}" class="btn btn-lg btn-outline-info" role="button" aria-pressed="true">网站制作</a>
+                        <a href="{{ path('home') }}" class="btn btn-outline-info my-1" role="button" aria-pressed="true">网站制作</a>
                             {% else %}
                         {% endfor %}
                     </div>
@@ -72,7 +72,7 @@
                     <div class="card-header">客户案例</div>
                     <div class="card-body">
                         {% for article_case in articles|from_cate('案例') %}
-                            <a href="/article/{{ article_case.slug }}" class="btn btn-lg btn-outline-info" role="button" aria-pressed="true">{{ article_case.title }}</a>
+                            <a href="/article/{{ article_case.slug }}" class="btn btn-outline-info my-1" role="button" aria-pressed="true">{{ article_case.title }}</a>
                             {% else %}
                         {% endfor %}
                     </div>

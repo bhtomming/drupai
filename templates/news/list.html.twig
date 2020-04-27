@@ -14,25 +14,17 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <ul class="list-group  list-group-flush">
-                        {% for article in articles %}
-                            <li class="list-group-item">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg ? : default_image | imagine_filter('left_thumb') }}"  class="img-thumbnail mr-3" alt="{{ article.title }}" onerror="this.src='{{ asset(default_image) }}'"></a>
-                                        <div class="media-body">
-                                            <h5 class="mt-0"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h5>
-                                            <a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        {% else %}
-                            <li class="list-group-item">目前没有任何内容</li>
-                        {% endfor %}
-                    </ul>
-                </div>
+                <ul class="list-group list-group-flush">
+                    {% for article in articles %}
+                        <li class="list-group-item">
+                            <a href="{{ path('article_show',{'slug': article.slug}) }}"><img src="{{ article.titleImg ? : default_image | imagine_filter('left_thumb') }}"  class="img-thumbnail mr-3 float-left"></a>
+                            <h6 class="list-title"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.title }}</a></h6>
+                            <p class="list-summary"><a href="{{ path('article_show',{'slug': article.slug}) }}">{{ article.summary }}</a></p>
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">目前没有任何内容</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         {% if articles.haveToPaginate is defined %}

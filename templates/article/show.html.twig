@@ -15,14 +15,14 @@
         </nav>
 
         <div class="row my-3">
-            <div class="col-md-9">
+            <div class="col-md-9  article-warp">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-center">{{ article.title }}</h2>
                         <blockquote class="blockquote">
                             <footer class="blockquote-footer text-center">作者:{{ article.author }}</footer>
                         </blockquote>
-                        <p class="py-md-3">{{ article.content |raw }}</p>
+                        <article class="py-md-3 article-body">{{ article.content |raw }}</article>
                     </div>
                 </div>
 

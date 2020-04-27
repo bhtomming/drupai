@@ -6,6 +6,46 @@ ul,li,a,img,p{
 }
 body {
     background-color: #f5f8fa!important;
+    font-family: -apple-system,BlinkMacSystemFont,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-feature-settings: "tnum";
+    font-variant: tabular-nums;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+}
+/********菜单导航*****************/
+#navbarmain .nav-item .nav-link{
+    color: #fff;
+}
+#navbarmain .nav-item .nav-link:hover{
+    background-color: #262626;
+    color: #999;
+}
+/*****内容主体区域********/
+#main-body {}
+/********文章列表********/
+.list-title a{
+    color: #000;
+}
+
+
+/*******页脚内容*************/
+#footer{
+    font-size: 0.85rem;
+}
+#footer li{
+    line-height: 0.75rem;
+}
+
+
+
+.list-summary{
+    font-size: 0.88rem;
+}
+.list-summary a{
+    color: #999;
+}
+#cnzz_stat_icon_1278852934{
+    display: none;
 }
 #swiper-container-hd img{
     width: 100%;
@@ -42,9 +82,7 @@ body {
     top: 0;
     left: 0;
 }
-#footer{
-    font-size: 14px;
-}
+
 #footer a{
     color: #fff;
     text-decoration: none;
@@ -188,4 +226,29 @@ a:hover{
 }
 .rem-5{
     font-size: 5rem;
+}
+/***********文章内容***************/
+.article-body{
+    font-weight: bolder;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+.article-body p{
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+.article-warp{
+    margin-bottom: 20px;
+}
+/**********网站地图*************/
+#pills-tabContent{
+    font-size: 0.78rem;
+    line-height: 1.2rem;
+}
+#pills-tabContent .btn{
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
 }
