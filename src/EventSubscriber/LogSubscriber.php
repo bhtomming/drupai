@@ -67,7 +67,15 @@ class LogSubscriber implements EventSubscriberInterface
                 'Baiduspider'=>'百度爬虫', // 百度爬虫
                 'Yahoo! Slurp'=>'雅虎爬虫', // 雅虎爬虫
                 'YodaoBot'=>'有道爬虫', // 有道爬虫
-                'msnbot'=>'Bing爬虫'
+                'bingbot'=>'Bing爬虫',
+                'Sogou web spider' => '搜狗爬虫',
+                '360Spider' => '360爬虫',
+                'msnbot' => 'msn爬虫',
+                'Sosospider' => 'SOSO爬虫',
+                'ia_archiver' => 'Alexa蜘蛛',
+                'EasouSpider' => '宜搜蜘蛛',
+                'JikeSpider' => '即刻蜘蛛',
+                'YisouSpider' => '一搜蜘蛛',
             );
             foreach($spiderSite as $spider => $name) {
                 $spider = strtolower($spider);

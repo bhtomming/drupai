@@ -26,7 +26,7 @@ class FriendLinkAdmin extends AbstractAdmin
     public function configureListFields(ListMapper $list)
     {
         $list
-            ->add("name",null,[
+            ->addIdentifier("name",null,[
             'label'=> '名称'
             ])
             ->add("url",null,[

@@ -32,6 +32,8 @@ yarn-error.log
 
 /public/uploader
 /public/uploader/
+/public/uploads
+/public/uploads/
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
