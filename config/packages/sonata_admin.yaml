@@ -81,3 +81,9 @@ services:
         arguments: [~, App\Entity\Block ,~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: '区块管理' }
+
+    admin.relink:
+        class: App\Admin\RelinkAdmin
+        arguments: [~, App\Entity\Relink ,~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: '链接标签' }

@@ -17,6 +17,7 @@ use App\Entity\FriendLink;
 use App\Entity\Meta;
 use App\Entity\Region;
 use App\Entity\ReleLink;
+use App\Entity\Relink;
 use App\Entity\Scripts;
 use App\Entity\Settings;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,6 +51,7 @@ class AppExtension  extends AbstractExtension
         return [
             new TwigFilter('sortBy',[$this,'sortBy']),
             new TwigFilter('from_cate',[$this,'fromCate']),
+            new TwigFilter('relink',[$this,'relink']),
         ];
     }
 
@@ -64,6 +66,23 @@ class AppExtension  extends AbstractExtension
             new TwigFunction("region",[$this,"getRegion"],['is_safe'=>['html'],'needs_environment'=>true]),
 
         ];
+    }
+
+    public function relink($article)
+    {
+        $em = $this->getManager();
+        $relinks = $em->getRepository(Relink::class)->findAll();
+
+        if(!empty($relinks)){
+
+            foreach ($relinks as $relink)
+            {
+                $tag = $relink->getTag();
+                $str = "<a href='{$relink->getLink()}' >{$tag}</a>";
+                $article = str_replace($tag,$str,$article);
+            }
+        }
+        return $article;
     }
 
     public function getRegion(Environment $twig,$name)

@@ -78,7 +78,7 @@ class DefaultController extends AbstractController
     public function news(ArticleRepository $articleRepository,int $page){
         $em = $this->getDoctrine()->getManager();
         $category = $em->getRepository(Category::class)->findOneBy(['title'=>'最新动态']);
-        $articles = $articleRepository->findBy(['category'=>$category],['updatedAt'=>'ASC']);
+        $articles = $articleRepository->findBy(['category'=>$category],['updatedAt'=>'DESC']);
         $articles = $articleRepository->createPaginatorForArray($articles,$page);
 
         return $this->render('news/list.html.twig',['articles'=>$articles]);

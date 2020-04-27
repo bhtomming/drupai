@@ -22,7 +22,7 @@
                         <blockquote class="blockquote">
                             <footer class="blockquote-footer text-center">作者:{{ article.author }}</footer>
                         </blockquote>
-                        <article class="py-md-3 article-body">{{ article.content |raw }}</article>
+                        <article class="py-md-3 article-body">{{ article.content | relink | raw }}</article>
                     </div>
                 </div>
 

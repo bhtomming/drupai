@@ -22,6 +22,13 @@ body {
 }
 /*****内容主体区域********/
 #main-body {}
+.card-title a{
+    color: #000;
+}
+.cart-text a{
+    color: #999;
+    font-size: 0.88rem;
+}
 /********文章列表********/
 .list-title a{
     color: #000;
