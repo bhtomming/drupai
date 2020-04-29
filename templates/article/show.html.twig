@@ -6,13 +6,7 @@
 {% block body %}
     <div class="container my-3" id="page-article">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">首页</a></li>
-                <li class="breadcrumb-item"><a href="/category/{{ article.category.slug }}">{{ article.category.title }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ article.title }}</li>
-            </ol>
-        </nav>
+        {{ include("default/breadcrumb.html.twig",{object: article}) }}
 
         <div class="row my-3">
             <div class="col-md-9  article-warp">

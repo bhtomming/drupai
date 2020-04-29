@@ -13,6 +13,8 @@ namespace App\Twig;
 
 
 
+use App\Entity\Article;
+use App\Entity\Category;
 use App\Entity\FriendLink;
 use App\Entity\Meta;
 use App\Entity\Region;
@@ -64,8 +66,38 @@ class AppExtension  extends AbstractExtension
             new TwigFunction("getScripts",[$this,"getScripts"]),
             new TwigFunction("releLinks",[$this,"releLinks"]),
             new TwigFunction("region",[$this,"getRegion"],['is_safe'=>['html'],'needs_environment'=>true]),
+            new TwigFunction("breadcrumb",[$this,"getBreadcrumb"]),
 
         ];
+    }
+
+    public function getBreadcrumb($object)
+    {
+        $breadcrumb = [];
+        $category = $object instanceof Category ? $object : null;
+        if($object instanceof Article)
+        {
+            $breadcrumb[] = $this->addBreadcrumb($object->getTitle());
+            $category = $object->getCategory();
+        }
+        if ($category instanceof Category )
+        {
+            while ($category != null)
+            {
+                $breadcrumb[] = $this->addBreadcrumb($category->getTitle(),$this->router->generate('category_show',['slug' =>$category->getSlug()]));
+                $category = $category->getParent();
+            }
+        }
+        $breadcrumb[] = $this->addBreadcrumb('首页',$this->router->generate('home'));
+
+        return array_reverse($breadcrumb);
+    }
+
+    public function addBreadcrumb($name=null,$link=null)
+    {
+        $breadcrumb['name'] = $name;
+        $breadcrumb['link'] = $link;
+        return $breadcrumb;
     }
 
     public function relink($article)
