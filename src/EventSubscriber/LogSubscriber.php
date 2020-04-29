@@ -76,6 +76,7 @@ class LogSubscriber implements EventSubscriberInterface
                 'EasouSpider' => '宜搜蜘蛛',
                 'JikeSpider' => '即刻蜘蛛',
                 'YisouSpider' => '一搜蜘蛛',
+                'MJ12bot' => 'Majestic爬虫',
             );
             foreach($spiderSite as $spider => $name) {
                 $spider = strtolower($spider);

@@ -494,6 +494,9 @@
             "ref": "f75ac166398e107796ca94cc57fa1edaa06ec47f"
         }
     },
+    "symfony/twig-pack": {
+        "version": "v1.0.0"
+    },
     "symfony/validator": {
         "version": "4.1",
         "recipe": {
