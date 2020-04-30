@@ -25,7 +25,7 @@ class Category extends PageMeta
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="children")
-     * @ORM\Column(nullable = true)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $parent;
 
@@ -95,7 +95,11 @@ class Category extends PageMeta
 
    public function setParent(?self $parent): self
    {
-       $this->parent = $parent;
+       if($parent != null && $parent instanceof Category)
+       {
+           //$parent->addChild($this);
+           $this->parent = $parent;
+       }
 
        return $this;
    }
@@ -112,7 +116,9 @@ class Category extends PageMeta
    {
        if (!$this->children->contains($child)) {
            $this->children[] = $child;
+
            $child->setParent($this);
+
        }
 
        return $this;

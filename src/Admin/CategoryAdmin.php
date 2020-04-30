@@ -15,13 +15,22 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CategoryAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $form)
     {
-        $form->add('title',null,array(
+        $form
+            ->add('parent',EntityType::class,[
+                'label'=>'上级分类',
+                'choice_label'=>'title',
+                'class'=>Category::class,
+                 'placeholder'  => '选择上级分类',
+                'required' => false,
+            ])
+            ->add('title',null,array(
                     'label'=> '名称'
                 ))
             ->add('keywords',null,array(
@@ -59,6 +68,5 @@ class CategoryAdmin extends AbstractAdmin
         $object->setSlug($pinyin->getChineseChar($object->getTitle()));
         return parent::create($object);
     }
-
 
 }

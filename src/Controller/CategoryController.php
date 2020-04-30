@@ -35,9 +35,17 @@ class CategoryController extends AbstractController
         $session = $request->getSession();
         $path = $request->getPathInfo();
         $this->isRead($session,$path,$category);
+        $childrenCategory = $category->getChildren();
         $articles = $articleRepository->findByCategory($category->getId());
-        $articles = $articleRepository->createPaginatorForArray($articles,$page);
+        if(!$childrenCategory->isEmpty())
+        {
+            foreach ($childrenCategory as $childCategory)
+            {
+                $articles = array_merge($articles,$articleRepository->findByCategory($childCategory->getId()));
+            }
+        }
 
+        $articles = $articleRepository->createPaginatorForArray($articles,$page);
 
         return $this->render('category/list.html.twig', [
             'articles' => $articles,

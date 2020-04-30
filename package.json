@@ -1,13 +1,13 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.22.0",
-        "bootstrap": "^4.2.1",
-        "jquery": "^3.4.1",
-        "less-loader": "4.1.0",
-        "popper.js": "^1.15.0",
-        "stylus": "^0.54.5",
+        "@symfony/webpack-encore": "^0.29.1",
+        "bootstrap": "^4.4.1",
+        "jquery": "^3.5.0",
+        "less-loader": "6.0.0",
+        "popper.js": "^1.16.1",
+        "stylus": "^0.54.7",
         "stylus-loader": "3.0.2",
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.8.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -18,8 +18,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "node-sass": "^4.11.0",
+        "node-sass": "^4.14.0",
         "package": "^1.0.1",
-        "sass-loader": "^7.1.0"
+        "sass-loader": "^8.0.2"
     }
 }
