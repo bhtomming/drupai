@@ -15,6 +15,18 @@
 User-agent: SemrushBot
 Disallow: /
 
+User-agent: Barkrowler
+Disallow: /
+
+User-agent: AlphaBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Nimbostratus-Bot
+Disallow: /
+
 User-agent: AhrefsBot
 Disallow: /
 
