@@ -18,17 +18,27 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ArticleAdmin extends AbstractAdmin
 {
+    //public $supportsPreviewMode = true;
+
     protected $datagridValues = [
         '_page' => 1,
         '_sort_order' => 'DESC',
         '_sort_by' => 'updatedAt',
     ];
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('view');
+    }
 
     protected function configureListFields(ListMapper $list)
     {
@@ -53,8 +63,31 @@ class ArticleAdmin extends AbstractAdmin
                 'timezone' => 'Asia/Shanghai',
                 'sortable'=>true,
                 ])
+            // You may also specify the actions you want to be displayed in the list
+            ->add('_action', null, [
+                'label'=>'操作',
+                'actions' => [
+                    'view'=>[],
+                    'edit' => [
+                        // You may add custom link parameters used to generate the action url
+                        'link_parameters' => [
+                            'full' => true,
+                        ]
+                    ],
+                    'delete' => [],
+                ]
+            ])
         ;
     }
+
+    /*public function configureActionButtons($action, $object = null)
+    {
+        $list = parent::configureActionButtons($action, $object);
+
+        $list['view']['template'] = 'list__action_view.html.twig';
+
+        return $list;
+    }*/
 
     protected function configureFormFields(FormMapper $form)
     {
@@ -63,18 +96,36 @@ class ArticleAdmin extends AbstractAdmin
         if($article && $imgPath =  $article->getTitleImg()){
             $imageOption['help'] = '<img src="'.$imgPath.'" class="admin-preview" />';
         }
-        $form->add('title')
-            ->add('image',FileType::class,$imageOption)
-            ->add('summary')
+        $form->add('title',null,[
+            'label'=>'标题'
+        ])
+            ->add('image',FileType::class,$imageOption,[
+                'label'=>'文章头图'
+            ])
+            ->add('summary',TextareaType::class,[
+                'label'=>'文章简介',
+                'required' => false,
+            ])
             ->add('category',EntityType::class,[
+                'label'=>'文章分类',
                 'class' => Category::class,
                 'choice_label' => 'title',
             ])
-            ->add('content',CKEditorType::class,array(
-                'config' => []
-            ))
+            ->add('content',CKEditorType::class,[
+                'label'=>'正文内容',
+                'config' => [],
+            ])
+            ->add('keywords',null,[
+                'label'=>'关键词',
+            ])
+            ->add('description',TextareaType::class,[
+                'label'=>'描述',
+                'required' => false,
+            ])
         ;
     }
+
+
 
     public function configureBatchActions($actions)
     {

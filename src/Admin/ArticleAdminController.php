@@ -68,5 +68,15 @@ class ArticleAdminController extends CRUDController
         ]));
     }
 
+    public function viewAction(Request $request)
+    {
+        $article = $this->admin->getObject($request->query->get("id"));
+
+        return new RedirectResponse($this->generateUrl('article_show',['slug'=>$article->getSlug()]));
+    }
+
+
+
+
 
 }

@@ -44,7 +44,7 @@ class LogSubscriber implements EventSubscriberInterface
             $userLog->setCurrentUrl($currentUrl);
             $userLog->setIp($ip);
             $userLog->setUserAgent($userAgent);
-            $userLog->setReferrer($server->get('HTTP_REFERRER'));
+            $userLog->setReferrer($server->get('HTTP_REFERER'));
             $userLog->setAction($request->getMethod());
             $userLog->setData(json_encode($request->request->all()));
             $userLog->setCreatedAt(new \DateTime('now'));

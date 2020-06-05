@@ -1,0 +1,9 @@
+<a
+        target="_blank"
+        href="{{ admin.generateObjectUrl('view', object, actions.link_parameters|default([])) }}"
+        class="btn btn-sm btn-default edit_link"
+        title="{{ '查看'|trans({}, 'SonataAdminBundle') }}"
+>
+    <i class="fa fa-eye" aria-hidden="true"></i>
+    {{ '查看'|trans({}, 'SonataAdminBundle') }}
+</a>

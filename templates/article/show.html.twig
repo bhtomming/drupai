@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block keywords %}{{ article.keywords }}{% endblock %}
+
 {% block title %}{{ article.title }}_{{ parent() }}{% endblock %}
+{% block keywords %}{{ article.keywords ? : article.category.keywords }}{% endblock %}
+{% block description %}{{ article.description ? : article.category.description }}{% endblock %}
 
 {% block body %}
     <div class="container my-3" id="page-article">
